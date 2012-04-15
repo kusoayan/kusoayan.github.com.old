@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Others | My Octopress Blog]]></title>
   <link href="http://kusoayan.github.com/blog/categories/others/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-15T22:18:28+08:00</updated>
+  <updated>2012-04-15T22:20:49+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -21,7 +21,9 @@
     <content type="html"><![CDATA[<p>Hello Octopress!</p>
 
 <p><code>php
+&lt;?php
 echo "Hello Octopress!";
+?&gt;
 </code></p>
 ]]></content>
   </entry>
