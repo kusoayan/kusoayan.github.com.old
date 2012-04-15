@@ -4,7 +4,7 @@
   <title><![CDATA[Category: gem | My Octopress Blog]]></title>
   <link href="http://kusoayan.github.com/blog/categories/gem/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-15T22:46:53+08:00</updated>
+  <updated>2012-04-15T22:49:05+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -20,7 +20,10 @@
     <id>http://kusoayan.github.com/blog/2012/04/15/fix-that-gem-not-in-the-path</id>
     <content type="html"><![CDATA[<p>這篇紀錄一下如何把 gem(或其他需要被加入 PATH 中的資料夾) 的資料夾加入 PATH 當中，</p>
 
-<p>參考連結<a href="http://stackoverflow.com/questions/909673/how-do-i-use-gems-with-ubuntu">How do I use gems with Ubuntu?</a></p>
+<p>參考連結 <a href="http://stackoverflow.com/questions/909673/how-do-i-use-gems-with-ubuntu">How do I use gems with Ubuntu?</a></p>
+
+<!-- more -->
+
 
 <p>用 <code>gem env</code> 察看 gem 的路徑
 ```

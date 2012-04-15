@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Others | My Octopress Blog]]></title>
   <link href="http://kusoayan.github.com/blog/categories/others/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-15T22:46:53+08:00</updated>
+  <updated>2012-04-15T22:49:05+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -27,6 +27,9 @@ echo "Hello Octopress!";
 </code></p>
 
 <p>經過幾翻波折後，終於搞定 Octopress 了！</p>
+
+<!-- more -->
+
 
 <p>基本安裝是參考<a href="http://lyhdev.com/note:octopress">這篇</a>以及<a href="http://octopress.org/">Octopress</a>的 Docs。</p>
 
