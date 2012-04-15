@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://kusoayan.github.com/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-15T22:20:49+08:00</updated>
+  <updated>2012-04-15T22:46:53+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -12,6 +12,73 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[解決 archlinux 下 gem 不在系統路徑(PATH)的問題]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/04/15/fix-that-gem-not-in-the-path/"/>
+    <updated>2012-04-15T22:26:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/04/15/fix-that-gem-not-in-the-path</id>
+    <content type="html"><![CDATA[<p>這篇紀錄一下如何把 gem(或其他需要被加入 PATH 中的資料夾) 的資料夾加入 PATH 當中，</p>
+
+<p>參考連結<a href="http://stackoverflow.com/questions/909673/how-do-i-use-gems-with-ubuntu">How do I use gems with Ubuntu?</a></p>
+
+<p>用 <code>gem env</code> 察看 gem 的路徑</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[kusoayan@myArch octopress]$ gem env
+</span><span class='line'>RubyGems Environment:
+</span><span class='line'>  - RUBYGEMS VERSION: 1.8.11
+</span><span class='line'>  - RUBY VERSION: 1.9.3 (2012-02-16 patchlevel 125) [x86_64-linux]
+</span><span class='line'>  - INSTALLATION DIRECTORY: /usr/lib/ruby/gems/1.9.1
+</span><span class='line'>  - RUBY EXECUTABLE: /usr/bin/ruby
+</span><span class='line'>  - EXECUTABLE DIRECTORY: /usr/bin
+</span><span class='line'>  - RUBYGEMS PLATFORMS:
+</span><span class='line'>    - ruby
+</span><span class='line'>    - x86_64-linux
+</span><span class='line'>  - GEM PATHS:
+</span><span class='line'>     - /usr/lib/ruby/gems/1.9.1
+</span><span class='line'>     - /home/kusoayan/.gem/ruby/1.9.1
+</span><span class='line'>  - GEM CONFIGURATION:
+</span><span class='line'>     - :update_sources =&gt; true
+</span><span class='line'>     - :verbose =&gt; true
+</span><span class='line'>     - :benchmark =&gt; false
+</span><span class='line'>     - :backtrace =&gt; false
+</span><span class='line'>     - :bulk_threshold =&gt; 1000
+</span><span class='line'>     - "gem" =&gt; "--user-install"
+</span><span class='line'>  - REMOTE SOURCES:
+</span><span class='line'>     - http://rubygems.org/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>找到其中 GEM PATHS 之後，把他加入 .bashrc：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export PATH=$PATH:/home/kusoayan/.gem/ruby/1.9.1/bin</span></code></pre></td></tr></table></div></figure>
+
+
+<p>這樣就完工了！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hello Octopress]]></title>
@@ -28,6 +95,40 @@
 </span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<p>經過幾翻波折後，終於搞定 Octopress 了！</p>
+
+<p>基本安裝是參考<a href="http://lyhdev.com/note:octopress">這篇</a>以及<a href="http://octopress.org/">Octopress</a>的 Docs。</p>
+
+<p>途中遇到一個問題是我安裝 gem 後，gem 卻不在我的 PATH 當中，導致我沒辦法正確使用…解決方法可以參考<a href="http://kusoayan.github.com/">解決 archlinux 下 gem 不在系統路徑(PATH)的問題</a>。</p>
+
+<p>再來還有遇到一個問題是我在使用 <code>rake generate</code> 時出現了以下錯誤</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">  File &quot;&lt;string&gt;&quot;, line 1</span>
+</span><span class='line'><span class="x">    import sys; print sys.executable</span>
+</span><span class='line'><span class="x">                        ^</span>
+</span><span class='line'><span class="x">SyntaxError: invalid syntax</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>明顯是 python 版本作怪，解法可以參考<a href="http://blog.gonzih.org/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/">How to Fix Octopress Pygments Error on Arch Linu</a></p>
+
+<p>簡單來講就是在你的 plugins 資料夾中增加一個 ruby 檔案 ruby_python_arch_linux_fix.rb：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">RubyPython</span><span class="o">.</span><span class="n">configure</span> <span class="ss">:python_exe</span> <span class="o">=&gt;</span> <span class="s1">&#39;python2.7&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>就可以了</p>
+
+<p>再來是 <em>markdown</em> 語法，可以參考<a href="http://markdown.tw/">Markdown: Syntax 中文版</a>，我覺得寫的相當不錯！</p>
+
+<p>最後就是，能用 vim 來寫 blog 真的滿爽的XD</p>
 ]]></content>
   </entry>
   

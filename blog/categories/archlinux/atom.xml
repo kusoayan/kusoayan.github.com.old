@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: archlinux | My Octopress Blog]]></title>
+  <link href="http://kusoayan.github.com/blog/categories/archlinux/atom.xml" rel="self"/>
+  <link href="http://kusoayan.github.com/"/>
+  <updated>2012-04-15T22:46:53+08:00</updated>
+  <id>http://kusoayan.github.com/</id>
+  <author>
+    <name><![CDATA[Lazy Wei]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[解決 archlinux 下 gem 不在系統路徑(PATH)的問題]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/04/15/fix-that-gem-not-in-the-path/"/>
+    <updated>2012-04-15T22:26:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/04/15/fix-that-gem-not-in-the-path</id>
+    <content type="html"><![CDATA[<p>這篇紀錄一下如何把 gem(或其他需要被加入 PATH 中的資料夾) 的資料夾加入 PATH 當中，</p>
+
+<p>參考連結<a href="http://stackoverflow.com/questions/909673/how-do-i-use-gems-with-ubuntu">How do I use gems with Ubuntu?</a></p>
+
+<p>用 <code>gem env</code> 察看 gem 的路徑
+```
+[kusoayan@myArch octopress]$ gem env
+RubyGems Environment:
+  - RUBYGEMS VERSION: 1.8.11
+  - RUBY VERSION: 1.9.3 (2012-02-16 patchlevel 125) [x86_64-linux]
+  - INSTALLATION DIRECTORY: /usr/lib/ruby/gems/1.9.1
+  - RUBY EXECUTABLE: /usr/bin/ruby
+  - EXECUTABLE DIRECTORY: /usr/bin
+  - RUBYGEMS PLATFORMS:</p>
+
+<pre><code>- ruby
+- x86_64-linux
+</code></pre>
+
+<ul>
+<li>GEM PATHS:
+
+<ul>
+<li>/usr/lib/ruby/gems/1.9.1</li>
+<li>/home/kusoayan/.gem/ruby/1.9.1</li>
+</ul>
+</li>
+<li>GEM CONFIGURATION:
+
+<ul>
+<li>:update_sources => true</li>
+<li>:verbose => true</li>
+<li>:benchmark => false</li>
+<li>:backtrace => false</li>
+<li>:bulk_threshold => 1000</li>
+<li>"gem" => "--user-install"</li>
+</ul>
+</li>
+<li>REMOTE SOURCES:
+
+<ul>
+<li>http://rubygems.org/
+```</li>
+</ul>
+</li>
+</ul>
+
+
+<p>找到其中 GEM PATHS 之後，把他加入 .bashrc：
+<code>
+export PATH=$PATH:/home/kusoayan/.gem/ruby/1.9.1/bin
+</code></p>
+
+<p>這樣就完工了！</p>
+]]></content>
+  </entry>
+  
+</feed>

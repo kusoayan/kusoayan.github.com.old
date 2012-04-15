@@ -14,7 +14,7 @@
 3
 &lt;?php
 echo &quot;Hello Octopress!&quot;;
-?&gt; ">
+?&gt; 經過幾翻波折後，終於搞定 Octopress 了！ 基本安裝是參考這篇以及Octopress的 Docs。 途中遇到一個問題是我安裝 gem 後，gem &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -105,6 +105,40 @@ echo &quot;Hello Octopress!&quot;;
 </span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<p>經過幾翻波折後，終於搞定 Octopress 了！</p>
+
+<p>基本安裝是參考<a href="http://lyhdev.com/note:octopress">這篇</a>以及<a href="http://octopress.org/">Octopress</a>的 Docs。</p>
+
+<p>途中遇到一個問題是我安裝 gem 後，gem 卻不在我的 PATH 當中，導致我沒辦法正確使用…解決方法可以參考<a href="/">解決 archlinux 下 gem 不在系統路徑(PATH)的問題</a>。</p>
+
+<p>再來還有遇到一個問題是我在使用 <code>rake generate</code> 時出現了以下錯誤</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">  File &quot;&lt;string&gt;&quot;, line 1</span>
+</span><span class='line'><span class="x">    import sys; print sys.executable</span>
+</span><span class='line'><span class="x">                        ^</span>
+</span><span class='line'><span class="x">SyntaxError: invalid syntax</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>明顯是 python 版本作怪，解法可以參考<a href="http://blog.gonzih.org/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/">How to Fix Octopress Pygments Error on Arch Linu</a></p>
+
+<p>簡單來講就是在你的 plugins 資料夾中增加一個 ruby 檔案 ruby_python_arch_linux_fix.rb：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">RubyPython</span><span class="o">.</span><span class="n">configure</span> <span class="ss">:python_exe</span> <span class="o">=&gt;</span> <span class="s1">&#39;python2.7&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>就可以了</p>
+
+<p>再來是 <em>markdown</em> 語法，可以參考<a href="http://markdown.tw/">Markdown: Syntax 中文版</a>，我覺得寫的相當不錯！</p>
+
+<p>最後就是，能用 vim 來寫 blog 真的滿爽的XD</p>
 </div>
 
 
@@ -151,6 +185,8 @@ echo &quot;Hello Octopress!&quot;;
     <p class="meta">
       
       
+        <a class="basic-alignment right" href="/blog/2012/04/15/fix-that-gem-not-in-the-path/" title="Next Post: 解決 archlinux 下 gem 不在系統路徑(PATH)的問題">解決 archlinux 下 gem 不在系統路徑(PATH)的問題 &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -162,6 +198,10 @@ echo &quot;Hello Octopress!&quot;;
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/04/15/fix-that-gem-not-in-the-path/">解決 archlinux 下 gem 不在系統路徑(PATH)的問題</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/04/15/hello-octopress/">Hello Octopress</a>

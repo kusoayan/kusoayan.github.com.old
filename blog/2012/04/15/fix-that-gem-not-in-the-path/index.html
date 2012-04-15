@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>My Octopress Blog</title>
+  <title>解決 archlinux 下 gem 不在系統路徑(PATH)的問題 - My Octopress Blog</title>
   <meta name="author" content="Lazy Wei">
 
   
@@ -34,7 +34,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://kusoayan.github.com">
+  <link rel="canonical" href="http://kusoayan.github.com/blog/2012/04/15/fix-that-gem-not-in-the-path">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -78,15 +78,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/04/15/fix-that-gem-not-in-the-path/">解決 Archlinux 下 Gem 不在系統路徑(PATH)的問題</a></h1>
+      <h1 class="entry-title">解決 Archlinux 下 Gem 不在系統路徑(PATH)的問題</h1>
     
     
       <p class="meta">
@@ -109,7 +106,7 @@
   </header>
 
 
-  <div class="entry-content"><p>這篇紀錄一下如何把 gem(或其他需要被加入 PATH 中的資料夾) 的資料夾加入 PATH 當中，</p>
+<div class="entry-content"><p>這篇紀錄一下如何把 gem(或其他需要被加入 PATH 中的資料夾) 的資料夾加入 PATH 當中，</p>
 
 <p>參考連結<a href="http://stackoverflow.com/questions/909673/how-do-i-use-gems-with-ubuntu">How do I use gems with Ubuntu?</a></p>
 
@@ -169,22 +166,16 @@
 
 <p>這樣就完工了！</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/15/hello-octopress/">Hello Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Lazy Wei</span></span>
+
+      
 
 
 
@@ -196,70 +187,38 @@
   
 
 
-<time datetime="2012-04-15T22:00:00+08:00" pubdate data-updated="true">Apr 15<span>th</span>, 2012</time>
-        
-      </p>
+<time datetime="2012-04-15T22:26:00+08:00" pubdate data-updated="true">Apr 15<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/archlinux/'>archlinux</a>, <a class='category' href='/blog/categories/gem/'>gem</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><p>Hello Octopress!</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'><span class="k">echo</span> <span class="s2">&quot;Hello Octopress!&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>經過幾翻波折後，終於搞定 Octopress 了！</p>
-
-<p>基本安裝是參考<a href="http://lyhdev.com/note:octopress">這篇</a>以及<a href="http://octopress.org/">Octopress</a>的 Docs。</p>
-
-<p>途中遇到一個問題是我安裝 gem 後，gem 卻不在我的 PATH 當中，導致我沒辦法正確使用…解決方法可以參考<a href="/">解決 archlinux 下 gem 不在系統路徑(PATH)的問題</a>。</p>
-
-<p>再來還有遇到一個問題是我在使用 <code>rake generate</code> 時出現了以下錯誤</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">  File &quot;&lt;string&gt;&quot;, line 1</span>
-</span><span class='line'><span class="x">    import sys; print sys.executable</span>
-</span><span class='line'><span class="x">                        ^</span>
-</span><span class='line'><span class="x">SyntaxError: invalid syntax</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>明顯是 python 版本作怪，解法可以參考<a href="http://blog.gonzih.org/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/">How to Fix Octopress Pygments Error on Arch Linu</a></p>
-
-<p>簡單來講就是在你的 plugins 資料夾中增加一個 ruby 檔案 ruby_python_arch_linux_fix.rb：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">RubyPython</span><span class="o">.</span><span class="n">configure</span> <span class="ss">:python_exe</span> <span class="o">=&gt;</span> <span class="s1">&#39;python2.7&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>就可以了</p>
-
-<p>再來是 <em>markdown</em> 語法，可以參考<a href="http://markdown.tw/">Markdown: Syntax 中文版</a>，我覺得寫的相當不錯！</p>
-
-<p>最後就是，能用 vim 來寫 blog 真的滿爽的XD</p>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kusoayan.github.com/blog/2012/04/15/fix-that-gem-not-in-the-path/" data-via="" data-counturl="http://kusoayan.github.com/blog/2012/04/15/fix-that-gem-not-in-the-path/" >Tweet</a>
+  
+  
+  
 </div>
-  
-  
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/04/15/hello-octopress/" title="Previous Post: Hello Octopress">&laquo; Hello Octopress</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
 </div>
+
 <aside class="sidebar">
   
     <section>
@@ -284,6 +243,7 @@
 
   
 </aside>
+
 
     </div>
   </div>

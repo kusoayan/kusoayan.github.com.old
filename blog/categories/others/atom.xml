@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Others | My Octopress Blog]]></title>
   <link href="http://kusoayan.github.com/blog/categories/others/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-15T22:20:49+08:00</updated>
+  <updated>2012-04-15T22:46:53+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -25,6 +25,34 @@
 echo "Hello Octopress!";
 ?&gt;
 </code></p>
+
+<p>經過幾翻波折後，終於搞定 Octopress 了！</p>
+
+<p>基本安裝是參考<a href="http://lyhdev.com/note:octopress">這篇</a>以及<a href="http://octopress.org/">Octopress</a>的 Docs。</p>
+
+<p>途中遇到一個問題是我安裝 gem 後，gem 卻不在我的 PATH 當中，導致我沒辦法正確使用…解決方法可以參考<a href="/">解決 archlinux 下 gem 不在系統路徑(PATH)的問題</a>。</p>
+
+<p>再來還有遇到一個問題是我在使用 <code>rake generate</code> 時出現了以下錯誤
+```
+  File "<string>", line 1</p>
+
+<pre><code>import sys; print sys.executable
+                    ^
+</code></pre>
+
+<p>SyntaxError: invalid syntax
+```
+明顯是 python 版本作怪，解法可以參考<a href="http://blog.gonzih.org/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/">How to Fix Octopress Pygments Error on Arch Linu</a></p>
+
+<p>簡單來講就是在你的 plugins 資料夾中增加一個 ruby 檔案 ruby_python_arch_linux_fix.rb：
+<code>ruby
+RubyPython.configure :python_exe =&gt; 'python2.7'
+</code>
+就可以了</p>
+
+<p>再來是 <em>markdown</em> 語法，可以參考<a href="http://markdown.tw/">Markdown: Syntax 中文版</a>，我覺得寫的相當不錯！</p>
+
+<p>最後就是，能用 vim 來寫 blog 真的滿爽的XD</p>
 ]]></content>
   </entry>
   
