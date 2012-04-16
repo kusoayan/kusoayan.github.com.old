@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: gem - My Octopress Blog</title>
+  <title>Rake 0.9.2.2 vs 0.9.2 error - My Octopress Blog</title>
   <meta name="author" content="Lazy Wei">
 
   
-  <meta name="description" content="Category: gem">
+  <meta name="description" content="使用 rake 來執行依些 octopress 的指令時出現 You have already activated rake 0.9.2.2, but your Gemfile requires rake 0.9.2. Using bundle exec may solve this. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://kusoayan.github.comblog/categories/gem">
+  <link rel="canonical" href="http://kusoayan.github.com/blog/2012/04/17/rake-0-dot-9-2-dot-2-vs-0-dot-9-2-error">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -63,35 +63,96 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Gem</h1>
+    
+      <h1 class="entry-title">Rake 0.9.2.2 vs 0.9.2 Error</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-17T00:06:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2012</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>使用 rake 來執行依些 octopress 的指令時出現</p>
 
-  
-  <h2>2012</h2>
+<pre><code>You have already activated rake 0.9.2.2, but your Gemfile requires rake 0.9.2. Using bundle exec may solve this. 
+</code></pre>
 
-<article>
-  
-<h1><a href="/blog/2012/04/15/fix-that-gem-not-in-the-path/">解決 archlinux 下 gem 不在系統路徑(PATH)的問題</a></h1>
-<time datetime="2012-04-15T22:26:00+08:00" pubdate><span class='month'>Apr</span> <span class='day'>15</span> <span class='year'>2012</span></time>
+<p>一開始是乖乖聽他的話用 <code>bundle exec rake</code> 來取代 <code>rake</code>，不過很快我就覺得這樣實在太麻煩了，解決方法很簡單，直接在 terminal 輸入：</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/archlinux/'>archlinux</a>, <a class='category' href='/blog/categories/gem/'>gem</a></span>
-</footer>
+<pre><code>bundle update rake
+</code></pre>
 
-
-</article>
-
+<p>就可以了！</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Lazy Wei</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-17T00:06:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/octopress/'>octopress</a>, <a class='category' href='/blog/categories/rake/'>rake</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kusoayan.github.com/blog/2012/04/17/rake-0-dot-9-2-dot-2-vs-0-dot-9-2-error/" data-via="" data-counturl="http://kusoayan.github.com/blog/2012/04/17/rake-0-dot-9-2-dot-2-vs-0-dot-9-2-error/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/04/16/fuelphp-setup/" title="Previous Post: FuelPHP 安裝配置">&laquo; FuelPHP 安裝配置</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/04/17/octopress-content-manage-tool/" title="Next Post: Octopress content manage tool">Octopress content manage tool &raquo;</a>
+      
+    </p>
+  </footer>
 </article>
 
 </div>

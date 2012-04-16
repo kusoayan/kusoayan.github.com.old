@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: octopress | My Octopress Blog]]></title>
+  <link href="http://kusoayan.github.com/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://kusoayan.github.com/"/>
+  <updated>2012-04-17T00:56:50+08:00</updated>
+  <id>http://kusoayan.github.com/</id>
+  <author>
+    <name><![CDATA[Lazy Wei]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress content manage tool]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/04/17/octopress-content-manage-tool/"/>
+    <updated>2012-04-17T00:35:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/04/17/octopress-content-manage-tool</id>
+    <content type="html"><![CDATA[<p>因為 Octopress 本身沒有草稿功能，參考了<a href="http://hychen.wuweig.org/blog/2011/12/04/octopress-source-drafts-publish-management-process/">Octopress 程式碼與網站內容的管理</a>作者提供的工具後，應該就能順利解決。</p>
+
+<p>這邊紀錄一下在 archlinux 上的安裝步驟。</p>
+
+<!-- more -->
+
+
+<ol>
+<li><p>到 (https://github.com/hychen/octopress-admin) clone 檔案回來</p></li>
+<li><p>安裝 ucltip，可以用 pip 安裝，不過要注意一下 pip 版本，我是用 <code>pip2 install ucltip</code> 來安裝。</p></li>
+<li><p>把剛剛 clone 回來的 octopress-admin 丟到 <code>~/bin/</code> 底下，然後把 <code>~/bin/</code> 加到 <code>PATH</code> 中。</p></li>
+<li><p>稍微改一下 octopress-admin 的內容，把最上面的
+ #!/usr/bin/env python
+改成
+ #!/usr/bin/env python2</p></li>
+<li><p>因為 archlinux 上好像沒有 sensible-editor 這個套件，所以我直接改成用 vim 來編輯，一樣修改 octopress-admin，我把第 17 行的
+ ucltip.regcmds('rake', 'bundle', 'sensible-editor')
+改成了
+ ucltip.regcmds('rake', 'bundle', 'gvim')
+然後把檔案中的 <code>sensible_editor</code> 改成 <code>givm</code>，應該是有兩處要修改。</p></li>
+</ol>
+
+
+<p>接下來就可以照著原作者的 usage 去做了！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rake 0.9.2.2 vs 0.9.2 error]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/04/17/rake-0-dot-9-2-dot-2-vs-0-dot-9-2-error/"/>
+    <updated>2012-04-17T00:06:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/04/17/rake-0-dot-9-2-dot-2-vs-0-dot-9-2-error</id>
+    <content type="html"><![CDATA[<p>使用 rake 來執行依些 octopress 的指令時出現</p>
+
+<pre><code>You have already activated rake 0.9.2.2, but your Gemfile requires rake 0.9.2. Using bundle exec may solve this. 
+</code></pre>
+
+<p>一開始是乖乖聽他的話用 <code>bundle exec rake</code> 來取代 <code>rake</code>，不過很快我就覺得這樣實在太麻煩了，解決方法很簡單，直接在 terminal 輸入：</p>
+
+<pre><code>bundle update rake
+</code></pre>
+
+<p>就可以了！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hello Octopress]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/04/15/hello-octopress/"/>
+    <updated>2012-04-15T22:00:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/04/15/hello-octopress</id>
+    <content type="html"><![CDATA[<p>Hello Octopress!</p>
+
+<p><code>php
+&lt;?php
+echo "Hello Octopress!";
+?&gt;
+</code></p>
+
+<p>經過幾翻波折後，終於搞定 Octopress 了！</p>
+
+<!-- more -->
+
+
+<p>基本安裝是參考<a href="http://lyhdev.com/note:octopress">這篇</a>以及<a href="http://octopress.org/">Octopress</a>的 Docs。</p>
+
+<p>途中遇到一個問題是我安裝 gem 後，gem 卻不在我的 PATH 當中，導致我沒辦法正確使用…解決方法可以參考<a href="/blog/2012/04/15/fix-that-gem-not-in-the-path/">解決 archlinux 下 gem 不在系統路徑(PATH)的問題</a>。</p>
+
+<p>再來還有遇到一個問題是我在使用 <code>rake generate</code> 時出現了以下錯誤
+```
+  File "<string>", line 1</p>
+
+<pre><code>import sys; print sys.executable
+                    ^
+</code></pre>
+
+<p>SyntaxError: invalid syntax
+```
+明顯是 python 版本作怪，解法可以參考<a href="http://blog.gonzih.org/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/">How to Fix Octopress Pygments Error on Arch Linu</a></p>
+
+<p>簡單來講就是在你的 plugins 資料夾中增加一個 ruby 檔案 ruby_python_arch_linux_fix.rb：
+<code>ruby
+RubyPython.configure :python_exe =&gt; 'python2.7'
+</code>
+就可以了</p>
+
+<p>再來是 <em>markdown</em> 語法，可以參考<a href="http://markdown.tw/">Markdown: Syntax 中文版</a>，我覺得寫的相當不錯！</p>
+
+<p>最後就是，能用 vim 來寫 blog 真的滿爽的XD</p>
+]]></content>
+  </entry>
+  
+</feed>

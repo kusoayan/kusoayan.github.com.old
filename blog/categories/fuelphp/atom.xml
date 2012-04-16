@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: fuelphp | My Octopress Blog]]></title>
+  <link href="http://kusoayan.github.com/blog/categories/fuelphp/atom.xml" rel="self"/>
+  <link href="http://kusoayan.github.com/"/>
+  <updated>2012-04-17T00:56:50+08:00</updated>
+  <id>http://kusoayan.github.com/</id>
+  <author>
+    <name><![CDATA[Lazy Wei]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[fuelphp - oil generate 出錯]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/04/16/fuelphp-oil-generate-chu-cuo/"/>
+    <updated>2012-04-16T16:49:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/04/16/fuelphp-oil-generate-chu-cuo</id>
+    <content type="html"><![CDATA[<p>今天要用 FuelPHP 的 oil 時出現了一點小錯誤，當我下指令</p>
+
+<pre><code>oil generate model users username:varchar[50] password:string group:int email:string last_login:int login_hash:string profile_fields:text
+</code></pre>
+
+<p>時卻出現 Error 說找不到 migrations 的資料夾，上 IRC 問了之後才知道問題是出在 php.ini 中的 <code>open_basedir</code>，因為我有設定 php.ini 中的這個變數，導致 oil 沒辦法正確 resolve 資料夾。
+在 IRC 上討論了半天最後解法是直接把 <code>open_basedir</code> 直接 comment 掉。</p>
+]]></content>
+  </entry>
+  
+</feed>

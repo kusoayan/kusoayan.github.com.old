@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: gem - My Octopress Blog</title>
+  <title>Octopress content manage tool - My Octopress Blog</title>
   <meta name="author" content="Lazy Wei">
 
   
-  <meta name="description" content="Category: gem">
+  <meta name="description" content="因為 Octopress 本身沒有草稿功能，參考了Octopress 程式碼與網站內容的管理作者提供的工具後，應該就能順利解決。 這邊紀錄一下在 archlinux 上的安裝步驟。 到 (https://github.com/hychen/octopress-admin) clone 檔案回來 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://kusoayan.github.comblog/categories/gem">
+  <link rel="canonical" href="http://kusoayan.github.com/blog/2012/04/17/octopress-content-manage-tool">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -63,35 +63,107 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Gem</h1>
+    
+      <h1 class="entry-title">Octopress Content Manage Tool</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-17T00:35:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2012</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>因為 Octopress 本身沒有草稿功能，參考了<a href="http://hychen.wuweig.org/blog/2011/12/04/octopress-source-drafts-publish-management-process/">Octopress 程式碼與網站內容的管理</a>作者提供的工具後，應該就能順利解決。</p>
 
-  
-  <h2>2012</h2>
+<p>這邊紀錄一下在 archlinux 上的安裝步驟。</p>
 
-<article>
-  
-<h1><a href="/blog/2012/04/15/fix-that-gem-not-in-the-path/">解決 archlinux 下 gem 不在系統路徑(PATH)的問題</a></h1>
-<time datetime="2012-04-15T22:26:00+08:00" pubdate><span class='month'>Apr</span> <span class='day'>15</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/archlinux/'>archlinux</a>, <a class='category' href='/blog/categories/gem/'>gem</a></span>
-</footer>
+<!-- more -->
 
 
-</article>
+<ol>
+<li><p>到 (https://github.com/hychen/octopress-admin) clone 檔案回來</p></li>
+<li><p>安裝 ucltip，可以用 pip 安裝，不過要注意一下 pip 版本，我是用 <code>pip2 install ucltip</code> 來安裝。</p></li>
+<li><p>把剛剛 clone 回來的 octopress-admin 丟到 <code>~/bin/</code> 底下，然後把 <code>~/bin/</code> 加到 <code>PATH</code> 中。</p></li>
+<li><p>稍微改一下 octopress-admin 的內容，把最上面的
+ #!/usr/bin/env python
+改成
+ #!/usr/bin/env python2</p></li>
+<li><p>因為 archlinux 上好像沒有 sensible-editor 這個套件，所以我直接改成用 vim 來編輯，一樣修改 octopress-admin，我把第 17 行的
+ ucltip.regcmds(&#8216;rake&#8217;, &#8216;bundle&#8217;, &#8216;sensible-editor&#8217;)
+改成了
+ ucltip.regcmds(&#8216;rake&#8217;, &#8216;bundle&#8217;, &#8216;gvim&#8217;)
+然後把檔案中的 <code>sensible_editor</code> 改成 <code>givm</code>，應該是有兩處要修改。</p></li>
+</ol>
 
+
+<p>接下來就可以照著原作者的 usage 去做了！</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Lazy Wei</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-17T00:35:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/octopress/'>octopress</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kusoayan.github.com/blog/2012/04/17/octopress-content-manage-tool/" data-via="" data-counturl="http://kusoayan.github.com/blog/2012/04/17/octopress-content-manage-tool/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/04/17/rake-0-dot-9-2-dot-2-vs-0-dot-9-2-error/" title="Previous Post: Rake 0.9.2.2 vs 0.9.2 error">&laquo; Rake 0.9.2.2 vs 0.9.2 error</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>

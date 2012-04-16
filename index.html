@@ -9,7 +9,7 @@
   <meta name="author" content="Lazy Wei">
 
   
-  <meta name="description" content="這篇紀錄一下如何把 gem(或其他需要被加入 PATH 中的資料夾) 的資料夾加入 PATH 當中， 參考連結 How do I use gems with Ubuntu? ">
+  <meta name="description" content="因為 Octopress 本身沒有草稿功能，參考了Octopress 程式碼與網站內容的管理作者提供的工具後，應該就能順利解決。 這邊紀錄一下在 archlinux 上的安裝步驟。 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,6 +64,209 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/17/octopress-content-manage-tool/">Octopress Content Manage Tool</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-17T00:35:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>因為 Octopress 本身沒有草稿功能，參考了<a href="http://hychen.wuweig.org/blog/2011/12/04/octopress-source-drafts-publish-management-process/">Octopress 程式碼與網站內容的管理</a>作者提供的工具後，應該就能順利解決。</p>
+
+<p>這邊紀錄一下在 archlinux 上的安裝步驟。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/04/17/octopress-content-manage-tool/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/17/rake-0-dot-9-2-dot-2-vs-0-dot-9-2-error/">Rake 0.9.2.2 vs 0.9.2 Error</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-17T00:06:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>使用 rake 來執行依些 octopress 的指令時出現</p>
+
+<pre><code>You have already activated rake 0.9.2.2, but your Gemfile requires rake 0.9.2. Using bundle exec may solve this. 
+</code></pre>
+
+<p>一開始是乖乖聽他的話用 <code>bundle exec rake</code> 來取代 <code>rake</code>，不過很快我就覺得這樣實在太麻煩了，解決方法很簡單，直接在 terminal 輸入：</p>
+
+<pre><code>bundle update rake
+</code></pre>
+
+<p>就可以了！</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/16/fuelphp-setup/">FuelPHP 安裝配置</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-16T20:57:00+08:00" pubdate data-updated="true">Apr 16<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>這篇記一下 FuelPHP 的安裝配置步驟，config、orm、auth、oil generate 等</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/16/fuelphp-json/">FuelPHP Json</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-16T20:57:00+08:00" pubdate data-updated="true">Apr 16<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>這篇記一下 FuelPHP 的 json，extend Controller_Rest</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/16/fuelphp-oil-generate-chu-cuo/">Fuelphp - Oil Generate 出錯</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-16T16:49:00+08:00" pubdate data-updated="true">Apr 16<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今天要用 FuelPHP 的 oil 時出現了一點小錯誤，當我下指令</p>
+
+<pre><code>oil generate model users username:varchar[50] password:string group:int email:string last_login:int login_hash:string profile_fields:text
+</code></pre>
+
+<p>時卻出現 Error 說找不到 migrations 的資料夾，上 IRC 問了之後才知道問題是出在 php.ini 中的 <code>open_basedir</code>，因為我有設定 php.ini 中的這個變數，導致 oil 沒辦法正確 resolve 資料夾。
+在 IRC 上討論了半天最後解法是直接把 <code>open_basedir</code> 直接 comment 掉。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -173,11 +376,23 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2012/04/15/fix-that-gem-not-in-the-path/">解決 archlinux 下 gem 不在系統路徑(PATH)的問題</a>
+        <a href="/blog/2012/04/17/octopress-content-manage-tool/">Octopress content manage tool</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/04/15/hello-octopress/">Hello Octopress</a>
+        <a href="/blog/2012/04/17/rake-0-dot-9-2-dot-2-vs-0-dot-9-2-error/">Rake 0.9.2.2 vs 0.9.2 error</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/16/fuelphp-setup/">FuelPHP 安裝配置</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/16/fuelphp-json/">FuelPHP json</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/16/fuelphp-oil-generate-chu-cuo/">fuelphp - oil generate 出錯</a>
       </li>
     
   </ul>
