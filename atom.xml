@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://kusoayan.github.com/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-17T09:43:28+08:00</updated>
+  <updated>2012-04-17T21:03:09+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -34,7 +34,7 @@
 <pre><code> #!/usr/bin/env python 
 </code></pre>
 
- 改成
+改成
 
 <pre><code> #!/usr/bin/env python2 
 </code></pre></li>
@@ -43,12 +43,12 @@
 <pre><code> ucltip.regcmds('rake', 'bundle', 'sensible-editor')
 </code></pre>
 
- 改成了
+改成了
 
 <pre><code> ucltip.regcmds('rake', 'bundle', 'gvim')
 </code></pre>
 
-<p> 然後把檔案中的 <code>sensible_editor</code> 改成 <code>givm</code>，應該是有兩處要修改。</p></li>
+<p>然後把檔案中的 <code>sensible_editor</code> 改成 <code>givm</code>，應該是有兩處要修改。</p></li>
 </ol>
 
 
