@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vim | My Octopress Blog]]></title>
   <link href="http://kusoayan.github.com/blog/categories/vim/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-19T20:06:25+08:00</updated>
+  <updated>2012-04-19T20:08:43+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -37,7 +37,12 @@ endif
 
 <p>```</p>
 
-<p>沒意外的話應該會在第 81 行找到它的正規表示式 <code>`.\{-}`</code></p>
+<p>沒意外的話應該會在第 81 行找到它的正規表示式 <code>`.\{-}`</code>，把他改成 <code>\(^|[^\\]\)`.\{-}`</code>，然後再於第 86 行增加
+<code>vim
+let snippet = substitute(snippet, "\\\\`", "`", 'g')
+</code></p>
+
+<p>Done!</p>
 ]]></content>
   </entry>
   

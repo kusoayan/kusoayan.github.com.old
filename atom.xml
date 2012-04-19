@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://kusoayan.github.com/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-19T20:06:25+08:00</updated>
+  <updated>2012-04-19T20:08:43+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -44,7 +44,14 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>沒意外的話應該會在第 81 行找到它的正規表示式 <code>`.\{-}`</code></p>
+<p>沒意外的話應該會在第 81 行找到它的正規表示式 <code>`.\{-}`</code>，把他改成 <code>\(^|[^\\]\)`.\{-}`</code>，然後再於第 86 行增加</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="k">let</span> snippet <span class="p">=</span> substitute<span class="p">(</span>snippet<span class="p">,</span> <span class="c">&quot;\\\\`&quot;, &quot;`&quot;, &#39;g&#39;)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Done!</p>
 ]]></content>
   </entry>
   
