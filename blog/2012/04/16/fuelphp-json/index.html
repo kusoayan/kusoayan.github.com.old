@@ -122,7 +122,7 @@
 </span><span class='line'><span class="k">class</span> <span class="nc">Controller_Items</span> <span class="k">extends</span> <span class="nx">Controller_Rest</span>
 </span><span class='line'><span class="p">{</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">get_list</span><span class="p">()</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">post_list</span><span class="p">()</span>
 </span><span class='line'>    <span class="p">{</span>
 </span><span class='line'>        <span class="nv">$items</span> <span class="o">=</span> <span class="nx">Model_Item</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
 </span><span class='line'>        <span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
@@ -136,8 +136,8 @@
 </span><span class='line'>        <span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-</span><span class='line'>            <span class="s1">&#39;items&#39;</span> <span class="o">=&gt;</span> <span class="nv">$data</span><span class="p">,</span>
-</span><span class='line'>        <span class="p">));</span>
+</span><span class='line'>                    <span class="s1">&#39;items&#39;</span> <span class="o">=&gt;</span> <span class="nv">$data</span><span class="p">,</span>
+</span><span class='line'>                    <span class="p">));</span>
 </span><span class='line'>    <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -146,6 +146,13 @@
 <p>這是我在竹友會網站中應用到的例子。</p>
 
 <p>接著就可以用 http://your.domain/items/list.json 來取得 json 物件。</p>
+
+<p>另外值得一提的是，你會發現這時候 method 的開頭並不是 action<em>，而是 post</em>，其實這表示你限定可以傳入資料的型式，你可以用的有：
+* GET
+* POST
+* PUT
+* DELETE
+後面兩種是比較少用到，而且大多數瀏覽器也都不支援的！</p>
 </div>
 
 
@@ -171,6 +178,12 @@
 <time datetime="2012-04-16T20:57:00+08:00" pubdate data-updated="true">Apr 16<span>th</span>, 2012</time>
       
 
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/fuelphp/'>fuelphp</a>, <a class='category' href='/blog/categories/php/'>php</a>
+  
+</span>
+
 
     </p>
     
@@ -190,7 +203,7 @@
         <a class="basic-alignment left" href="/blog/2012/04/16/fuelphp-oil-generate-chu-cuo/" title="Previous Post: fuelphp - oil generate 出錯">&laquo; fuelphp - oil generate 出錯</a>
       
       
-        <a class="basic-alignment right" href="/blog/2012/04/16/fuelphp-setup/" title="Next Post: FuelPHP 安裝配置">FuelPHP 安裝配置 &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2012/04/16/fuelphp-setup/" title="Next Post: FuelPHP 安裝配置（一）">FuelPHP 安裝配置（一） &raquo;</a>
       
     </p>
   </footer>
@@ -219,7 +232,7 @@
       </li>
     
       <li class="post">
-        <a href="/blog/2012/04/16/fuelphp-setup/">FuelPHP 安裝配置</a>
+        <a href="/blog/2012/04/16/fuelphp-setup/">FuelPHP 安裝配置（一）</a>
       </li>
     
       <li class="post">
