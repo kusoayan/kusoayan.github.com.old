@@ -4,7 +4,7 @@
   <title><![CDATA[Category: fuelphp | My Octopress Blog]]></title>
   <link href="http://kusoayan.github.com/blog/categories/fuelphp/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-19T19:10:55+08:00</updated>
+  <updated>2012-04-19T19:13:27+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -27,10 +27,10 @@
 
 <ol>
 <li><p>直接透過指令安裝：
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+ <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ curl get.fuelphp.com/oil | sh&lt;code></span></code></pre></td></tr></table></div></figure></notextile></div>
-這種方式目前只在 \*nix 系統（Linux、OS X、Unix、etc.）上可以使用，下了指令之後，他會自己把 oil 這個 shell-script 抓下來然後安裝到你的</code>/usr/bin` 底下，也因此過程中他會需要你的密碼來授權。裝完之後可以看一下這個 shell-script 到底幹了什麼事情；
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>bash </span></figcaption>
+ 這種方式目前只在 \*nix 系統（Linux、OS X、Unix、etc.）上可以使用，下了指令之後，他會自己把 oil 這個 shell-script 抓下來然後安裝到你的</code>/usr/bin` 底下，也因此過程中他會需要你的密碼來授權。裝完之後可以看一下這個 shell-script 到底幹了什麼事情；
+ <div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>oil bash </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -59,30 +59,30 @@
 <span class='line-number'>26</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
 </span><span class='line'>
-</span><span class='line'>&lt;pre>&lt;code>\#!/bin/bash
+</span><span class='line'>&lt;pre>&lt;code> #!/bin/bash
 </span><span class='line'>
-</span><span class='line'>if [ -f "./oil" ]; then
-</span><span class='line'>        php oil "$@"
-</span><span class='line'>else
+</span><span class='line'> if [ -f "./oil" ]; then
+</span><span class='line'>         php oil "$@"
+</span><span class='line'> else
 </span><span class='line'>
-</span><span class='line'>        if [ "$1" == "create" ]; then
+</span><span class='line'>         if [ "$1" == "create" ]; then
 </span><span class='line'>
-</span><span class='line'>                if [ ! `which git` ]; then 
-</span><span class='line'>                    echo "For this installer to work you'll need to install Git."
-</span><span class='line'>                    echo '        http://git-scm.com/'
-</span><span class='line'>                fi
+</span><span class='line'>                 if [ ! `which git` ]; then 
+</span><span class='line'>                     echo "For this installer to work you'll need to install Git."
+</span><span class='line'>                     echo '        http://git-scm.com/'
+</span><span class='line'>                 fi
 </span><span class='line'>
-</span><span class='line'>                git clone --recursive git://github.com/fuel/fuel.git "./$2"
-</span><span class='line'>                php "./$2/oil" refine install
-</span><span class='line'>        else
-</span><span class='line'>                echo 'This is not a valid Fuel installation so Oil is a bit lost.'
-</span><span class='line'>                echo '        http://fuelphp.com/docs/installation/instructions.html'
+</span><span class='line'>                 git clone --recursive git://github.com/fuel/fuel.git "./$2"
+</span><span class='line'>                 php "./$2/oil" refine install
+</span><span class='line'>         else
+</span><span class='line'>                 echo 'This is not a valid Fuel installation so Oil is a bit lost.'
+</span><span class='line'>                 echo '        http://fuelphp.com/docs/installation/instructions.html'
 </span><span class='line'>
-</span><span class='line'>        fi
-</span><span class='line'>fi
+</span><span class='line'>         fi
+</span><span class='line'> fi
 </span><span class='line'>&lt;/code>&lt;/pre>
 </span><span class='line'>
-</span><span class='line'>&lt;p>```</span></code></pre></td></tr></table></div></figure></notextile></div></p></li>
+</span><span class='line'>&lt;p> ```</span></code></pre></td></tr></table></div></figure></notextile></div></p></li>
 <li><p>手動安裝</p></li>
 </ol>
 
