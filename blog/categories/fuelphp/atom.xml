@@ -4,7 +4,7 @@
   <title><![CDATA[Category: fuelphp | My Octopress Blog]]></title>
   <link href="http://kusoayan.github.com/blog/categories/fuelphp/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-20T00:40:47+08:00</updated>
+  <updated>2012-04-20T01:02:02+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -12,6 +12,103 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[用 fuelphp email 套件寄gmail]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/04/20/fuelphp-email-gmail/"/>
+    <updated>2012-04-20T00:42:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/04/20/fuelphp-email-gmail</id>
+    <content type="html"><![CDATA[<p>這篇紀錄如何在 FuelPHP 中透過 email 這個 package 去寄 email，以及利用 gmail 去寄信！</p>
+
+<!-- more -->
+
+
+<p>從 1.1 版開始，email 套件就有被包含在官方下載版本中，所以只需要引入就好，
+可以在兩個地方引入：
+``` php config.php
+// 在 app/config/config.php 的 'always_load' 底下
+'packages' => array(</p>
+
+<pre><code>'email',
+</code></pre>
+
+<p>),</p>
+
+<p>// 或在 controller 中:
+\Package::load('email');
+```
+然後把 packages/email/config/email.php 複製到 app/config/email.php 作為預設的設定檔，其中有些參數可以調整，這裡就紀錄我有用到的部份：
+- drive：預設是 'mail' 不過因為我要透過 gmail 去寄信所以這裡改成 'smtp'
+- smtp.host：預設為空，我改成了 gmail 的 'ssl://smtp.gmail.com'
+- smtp.port：預設是 25，同樣改成了 gmail 的 465
+- smtp.username：這裡就填上 gmail 的帳號（不用包含 @gmail.com）
+- smtp.password：這裡填 gmail 的密碼
+- newline：預設是 "\n" 不過為了讓 gmail 成功運作我改成了 "\r\n"，其實我也不知道為什麼要這樣，問了資工系強者學長後才知道可能是 Protocal 要求</p>
+
+<p>使用方面則超簡單
+``` php
+&lt;?php
+ // Create an instance
+$email = Email::forge();</p>
+
+<p>// 寄件人的地址
+$email->from('my@email.me', 'My Name');</p>
+
+<p>// 收件人的地址
+$email->to('blablabla@xxxmail.com', 'Johny Squid');</p>
+
+<p>// 標題
+$email->subject('This is the subject');</p>
+
+<p>// 如果要一次寄給多人的話，可以用：
+$email->to(array(</p>
+
+<pre><code>'example@mail.com',
+'another@mail.com' =&gt; 'With a Name',
+</code></pre>
+
+<p>);</p>
+
+<p>// 最後就是內容
+$email->body('This is my message');
+```</p>
+
+<p>然後可以使用 <code>send()</code> 方法來寄送：
+``` php
+&lt;?php
+try
+{</p>
+
+<pre><code>$email-&gt;send();
+</code></pre>
+
+<p>}
+catch(\EmailValidationFailedException $e)
+{</p>
+
+<pre><code>// The validation failed
+</code></pre>
+
+<p>}
+catch(\EmailSendingFailedException $e)
+{</p>
+
+<pre><code>// The driver could not send the email
+</code></pre>
+
+<p>}
+```
+當寄送郵件的時候，會有兩種例外狀況可以處理，分別是
+- \EmailValidationFailedException 當郵件地址格式沒通過驗證的時候
+- \EmailSendingFailedException 當 driver 沒有成功運行的時候</p>
+
+<p>基本上我就用到這些了，不過如果要再更實用點的話，其實可以設定 html_body：
+<code>php
+$email-&gt;html_body(\View::forge('email/template', $email_data));
+</code>
+還可以搭配 template 來用非常方便！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[FuelPHP 安裝配置（一）]]></title>

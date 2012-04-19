@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://kusoayan.github.com/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-20T00:40:47+08:00</updated>
+  <updated>2012-04-20T01:02:02+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -14,11 +14,142 @@
 
   
   <entry>
+    <title type="html"><![CDATA[用 fuelphp email 套件寄gmail]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/04/20/fuelphp-email-gmail/"/>
+    <updated>2012-04-20T00:42:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/04/20/fuelphp-email-gmail</id>
+    <content type="html"><![CDATA[<p>這篇紀錄如何在 FuelPHP 中透過 email 這個 package 去寄 email，以及利用 gmail 去寄信！</p>
+
+<!-- more -->
+
+
+<p>從 1.1 版開始，email 套件就有被包含在官方下載版本中，所以只需要引入就好，
+可以在兩個地方引入：</p>
+
+<figure class='code'><figcaption><span>config.php </span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">// 在 app/config/config.php 的 &#39;always_load&#39; 底下</span>
+</span><span class='line'><span class="x">&#39;packages&#39; =&gt; array(</span>
+</span><span class='line'><span class="x">    &#39;email&#39;,</span>
+</span><span class='line'><span class="x">),</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">// 或在 controller 中:</span>
+</span><span class='line'><span class="x">\Package::load(&#39;email&#39;);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然後把 packages/email/config/email.php 複製到 app/config/email.php 作為預設的設定檔，其中有些參數可以調整，這裡就紀錄我有用到的部份：
+- drive：預設是 &#8216;mail&#8217; 不過因為我要透過 gmail 去寄信所以這裡改成 &#8216;smtp&#8217;
+- smtp.host：預設為空，我改成了 gmail 的 &#8216;ssl://smtp.gmail.com&#8217;
+- smtp.port：預設是 25，同樣改成了 gmail 的 465
+- smtp.username：這裡就填上 gmail 的帳號（不用包含 @gmail.com）
+- smtp.password：這裡填 gmail 的密碼
+- newline：預設是 &#8220;\n&#8221; 不過為了讓 gmail 成功運作我改成了 &#8220;\r\n&#8221;，其實我也不知道為什麼要這樣，問了資工系強者學長後才知道可能是 Protocal 要求</p>
+
+<p>使用方面則超簡單</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'> <span class="c1">// Create an instance</span>
+</span><span class='line'><span class="nv">$email</span> <span class="o">=</span> <span class="nx">Email</span><span class="o">::</span><span class="na">forge</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 寄件人的地址</span>
+</span><span class='line'><span class="nv">$email</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;my@email.me&#39;</span><span class="p">,</span> <span class="s1">&#39;My Name&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 收件人的地址</span>
+</span><span class='line'><span class="nv">$email</span><span class="o">-&gt;</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;blablabla@xxxmail.com&#39;</span><span class="p">,</span> <span class="s1">&#39;Johny Squid&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 標題</span>
+</span><span class='line'><span class="nv">$email</span><span class="o">-&gt;</span><span class="na">subject</span><span class="p">(</span><span class="s1">&#39;This is the subject&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 如果要一次寄給多人的話，可以用：</span>
+</span><span class='line'><span class="nv">$email</span><span class="o">-&gt;</span><span class="na">to</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="s1">&#39;example@mail.com&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;another@mail.com&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;With a Name&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 最後就是內容</span>
+</span><span class='line'><span class="nv">$email</span><span class="o">-&gt;</span><span class="na">body</span><span class="p">(</span><span class="s1">&#39;This is my message&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然後可以使用 <code>send()</code> 方法來寄送：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="k">try</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="nv">$email</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">catch</span><span class="p">(</span><span class="nx">\EmailValidationFailedException</span> <span class="nv">$e</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="c1">// The validation failed</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">catch</span><span class="p">(</span><span class="nx">\EmailSendingFailedException</span> <span class="nv">$e</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="c1">// The driver could not send the email</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>當寄送郵件的時候，會有兩種例外狀況可以處理，分別是
+- \EmailValidationFailedException 當郵件地址格式沒通過驗證的時候
+- \EmailSendingFailedException 當 driver 沒有成功運行的時候</p>
+
+<p>基本上我就用到這些了，不過如果要再更實用點的話，其實可以設定 html_body：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">$email-&gt;html_body(\View::forge(&#39;email/template&#39;, $email_data));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>還可以搭配 template 來用非常方便！</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[snipmate 反引號轉義]]></title>
     <link href="http://kusoayan.github.com/blog/2012/04/19/snipmate-with-backticks/"/>
     <updated>2012-04-19T19:46:00+08:00</updated>
     <id>http://kusoayan.github.com/blog/2012/04/19/snipmate-with-backticks</id>
-    <content type="html"><![CDATA[<p>今天要幫 *.markdown 文件加入 snipMate 的 snippet 時，發現寫 snippet 時不能使用 <code>\</code> <code>這個反引號（Backticks），而且當我加上</code> \ ` 來跳脫時也沒用，後來上網找了些資料再加上去看 snipMate.vim 中的寫法後才知道原來它根本沒加上跳脫的功能…囧
+    <content type="html"><![CDATA[<p>今天要幫 *.markdown 文件加入 snipMate 的 snippet 時，發現寫 snippet 時不能使用 ` 這個反引號（Backticks），而且當我加上 \ 來跳脫時也沒用，後來上網找了些資料再加上去看 snipMate.vim 中的寫法後才知道原來它根本沒加上跳脫的功能…囧
 解決辦法不難，在 snipMate.vim 中找到這段</p>
 
 <figure class='code'><figcaption><span>snipMate&#46;vim</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -52,49 +183,6 @@
 
 
 <p>Done!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress content manage tool]]></title>
-    <link href="http://kusoayan.github.com/blog/2012/04/17/octopress-content-manage-tool/"/>
-    <updated>2012-04-17T00:35:00+08:00</updated>
-    <id>http://kusoayan.github.com/blog/2012/04/17/octopress-content-manage-tool</id>
-    <content type="html"><![CDATA[<p>因為 Octopress 本身沒有草稿功能，參考了<a href="http://hychen.wuweig.org/blog/2011/12/04/octopress-source-drafts-publish-management-process/">Octopress 程式碼與網站內容的管理</a>作者提供的工具後，應該就能順利解決。</p>
-
-<p>這邊紀錄一下在 archlinux 上的安裝步驟。</p>
-
-<!-- more -->
-
-
-<ol>
-<li><p>到 (https://github.com/hychen/octopress-admin) clone 檔案回來</p></li>
-<li><p>安裝 ucltip，可以用 pip 安裝，不過要注意一下 pip 版本，我是用 <code>pip2 install ucltip</code> 來安裝。</p></li>
-<li><p>把剛剛 clone 回來的 octopress-admin 丟到 <code>~/bin/</code> 底下，然後把 <code>~/bin/</code> 加到 <code>PATH</code> 中。</p></li>
-<li><p>稍微改一下 octopress-admin 的內容，把最上面的</p>
-
-<pre><code> #!/usr/bin/env python 
-</code></pre>
-
-改成
-
-<pre><code> #!/usr/bin/env python2 
-</code></pre></li>
-<li><p>因為 archlinux 上好像沒有 sensible-editor 這個套件，所以我直接改成用 vim 來編輯，一樣修改 octopress-admin，我把第 17 行的</p>
-
-<pre><code> ucltip.regcmds('rake', 'bundle', 'sensible-editor')
-</code></pre>
-
-改成了
-
-<pre><code> ucltip.regcmds('rake', 'bundle', 'gvim')
-</code></pre>
-
-<p>然後把檔案中的 <code>sensible_editor</code> 改成 <code>givm</code>，應該是有兩處要修改。</p></li>
-</ol>
-
-
-<p>接下來就可以照著原作者的 usage 去做了！</p>
 ]]></content>
   </entry>
   
