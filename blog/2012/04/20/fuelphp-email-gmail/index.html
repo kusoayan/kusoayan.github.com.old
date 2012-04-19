@@ -123,13 +123,17 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>然後把 packages/email/config/email.php 複製到 app/config/email.php 作為預設的設定檔，其中有些參數可以調整，這裡就紀錄我有用到的部份：
-1. drive：預設是 &#8216;mail&#8217; 不過因為我要透過 gmail 去寄信所以這裡改成 &#8216;smtp&#8217;
-2. smtp.host：預設為空，我改成了 gmail 的 &#8216;ssl://smtp.gmail.com&#8217;
-3. smtp.port：預設是 25，同樣改成了 gmail 的 465
-4. smtp.username：這裡就填上 gmail 的帳號（不用包含 @gmail.com）
-5. smtp.password：這裡填 gmail 的密碼
-6. newline：預設是 &#8220;\n&#8221; 不過為了讓 gmail 成功運作我改成了 &#8220;\r\n&#8221;，其實我也不知道為什麼要這樣，問了資工系強者學長後才知道可能是 Protocal 要求</p>
+<p>然後把 packages/email/config/email.php 複製到 app/config/email.php 作為預設的設定檔，其中有些參數可以調整，這裡就紀錄我有用到的部份：</p>
+
+<ol>
+<li>drive：預設是 &#8216;mail&#8217; 不過因為我要透過 gmail 去寄信所以這裡改成 &#8216;smtp&#8217;</li>
+<li>smtp.host：預設為空，我改成了 gmail 的 &#8216;ssl://smtp.gmail.com&#8217;</li>
+<li>smtp.port：預設是 25，同樣改成了 gmail 的 465</li>
+<li>smtp.username：這裡就填上 gmail 的帳號（不用包含 @gmail.com）</li>
+<li>smtp.password：這裡填 gmail 的密碼</li>
+<li>newline：預設是 &#8220;\n&#8221; 不過為了讓 gmail 成功運作我改成了 &#8220;\r\n&#8221;，其實我也不知道為什麼要這樣，問了資工系強者學長後才知道可能是 Protocal 要求</li>
+</ol>
+
 
 <p>使用方面則超簡單</p>
 
@@ -209,9 +213,13 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>當寄送郵件的時候，會有兩種例外狀況可以處理，分別是
-1. \EmailValidationFailedException 當郵件地址格式沒通過驗證的時候
-2. \EmailSendingFailedException 當 driver 沒有成功運行的時候</p>
+<p>當寄送郵件的時候，會有兩種例外狀況可以處理，分別是：</p>
+
+<ol>
+<li>\EmailValidationFailedException 當郵件地址格式沒通過驗證的時候</li>
+<li>\EmailSendingFailedException 當 driver 沒有成功運行的時候</li>
+</ol>
+
 
 <p>基本上我就用到這些了，不過如果要再更實用點的話，其實可以設定 html_body：</p>
 
