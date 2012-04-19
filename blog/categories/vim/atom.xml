@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vim | My Octopress Blog]]></title>
   <link href="http://kusoayan.github.com/blog/categories/vim/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-19T20:08:43+08:00</updated>
+  <updated>2012-04-20T00:40:47+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -18,7 +18,7 @@
     <link href="http://kusoayan.github.com/blog/2012/04/19/snipmate-with-backticks/"/>
     <updated>2012-04-19T19:46:00+08:00</updated>
     <id>http://kusoayan.github.com/blog/2012/04/19/snipmate-with-backticks</id>
-    <content type="html"><![CDATA[<p>今天要幫 *.markdown 文件加入 snipMate 的 snippet 時，發現寫 snippet 時不能使用 <code>\`` 這個反引號（Backticks），而且當我加上</code> \ ` 來跳脫時也沒用，後來上網找了些資料再加上去看 snipMate.vim 中的寫法後才知道原來它根本沒加上跳脫的功能…囧
+    <content type="html"><![CDATA[<p>今天要幫 *.markdown 文件加入 snipMate 的 snippet 時，發現寫 snippet 時不能使用 <code>\</code> <code>這個反引號（Backticks），而且當我加上</code> \ ` 來跳脫時也沒用，後來上網找了些資料再加上去看 snipMate.vim 中的寫法後才知道原來它根本沒加上跳脫的功能…囧
 解決辦法不難，在 snipMate.vim 中找到這段</p>
 
 <p><code>`` vim snipMate\.vim
