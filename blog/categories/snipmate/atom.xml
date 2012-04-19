@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: snipmate | My Octopress Blog]]></title>
+  <link href="http://kusoayan.github.com/blog/categories/snipmate/atom.xml" rel="self"/>
+  <link href="http://kusoayan.github.com/"/>
+  <updated>2012-04-19T20:06:25+08:00</updated>
+  <id>http://kusoayan.github.com/</id>
+  <author>
+    <name><![CDATA[Lazy Wei]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[snipmate 反引號轉義]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/04/19/snipmate-with-backticks/"/>
+    <updated>2012-04-19T19:46:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/04/19/snipmate-with-backticks</id>
+    <content type="html"><![CDATA[<p>今天要幫 *.markdown 文件加入 snipMate 的 snippet 時，發現寫 snippet 時不能使用 <code>\`` 這個反引號（Backticks），而且當我加上</code> \ ` 來跳脫時也沒用，後來上網找了些資料再加上去看 snipMate.vim 中的寫法後才知道原來它根本沒加上跳脫的功能…囧
+解決辦法不難，在 snipMate.vim 中找到這段</p>
+
+<p><code>`` vim snipMate\.vim
+" Evaluate eval (</code>...`) expressions.</p>
+
+<pre><code>" Using a loop here instead of a regex fixes a bug with nested "\=".
+if stridx(snippet, '`') != -1
+    while match(snippet, '`.\{-}`') != -1
+        let snippet = substitute(snippet, '`.\{-}`',
+                    \ substitute(eval(matchstr(snippet, '`\zs.\{-}\ze`')),
+                    \ "\n\\%$", '', ''), '')
+    endw
+    let snippet = substitute(snippet, "\r", "\n", 'g')
+endif
+</code></pre>
+
+<p>```</p>
+
+<p>沒意外的話應該會在第 81 行找到它的正規表示式 <code>`.\{-}`</code></p>
+]]></content>
+  </entry>
+  
+</feed>

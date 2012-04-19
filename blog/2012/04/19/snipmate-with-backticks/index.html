@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Rake 0.9.2.2 vs 0.9.2 error - My Octopress Blog</title>
+  <title>snipmate 反引號轉義 - My Octopress Blog</title>
   <meta name="author" content="Lazy Wei">
 
   
-  <meta name="description" content="使用 rake 來執行依些 octopress 的指令時出現 You have already activated rake 0.9.2.2, but your Gemfile requires rake 0.9.2. Using bundle exec may solve this. &hellip;">
+  <meta name="description" content="今天要幫 *.markdown 文件加入 snipMate 的 snippet 時，發現寫 snippet 時不能使用 \`` 這個反引號（Backticks），而且當我加上 \ ` 來跳脫時也沒用，後來上網找了些資料再加上去看 snipMate.vim 中的寫法後才知道原來它根本沒加上跳脫的功能 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://kusoayan.github.com/blog/2012/04/17/rake-0-dot-9-2-dot-2-vs-0-dot-9-2-error">
+  <link rel="canonical" href="http://kusoayan.github.com/blog/2012/04/19/snipmate-with-backticks">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -67,7 +67,7 @@
   
   <header>
     
-      <h1 class="entry-title">Rake 0.9.2.2 vs 0.9.2 Error</h1>
+      <h1 class="entry-title">Snipmate 反引號轉義</h1>
     
     
       <p class="meta">
@@ -83,24 +83,40 @@
   
 
 
-<time datetime="2012-04-17T00:06:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2012</time>
+<time datetime="2012-04-19T19:46:00+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>使用 rake 來執行依些 octopress 的指令時出現</p>
+<div class="entry-content"><p>今天要幫 *.markdown 文件加入 snipMate 的 snippet 時，發現寫 snippet 時不能使用 <code>\`` 這個反引號（Backticks），而且當我加上</code> \ ` 來跳脫時也沒用，後來上網找了些資料再加上去看 snipMate.vim 中的寫法後才知道原來它根本沒加上跳脫的功能…囧
+解決辦法不難，在 snipMate.vim 中找到這段</p>
 
-<pre><code>You have already activated rake 0.9.2.2, but your Gemfile requires rake 0.9.2. Using bundle exec may solve this. 
-</code></pre>
+<figure class='code'><figcaption><span>snipMate&#46;vim</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="c">&quot; Evaluate eval (`...`) expressions.</span>
+</span><span class='line'><span class="c">    &quot; Using a loop here instead of a regex fixes a bug with nested &quot;\=&quot;.</span>
+</span><span class='line'>    <span class="k">if</span> stridx<span class="p">(</span>snippet<span class="p">,</span> <span class="s1">&#39;`&#39;</span><span class="p">)</span> <span class="p">!=</span> <span class="m">-1</span>
+</span><span class='line'>        <span class="k">while</span> <span class="k">match</span><span class="p">(</span>snippet<span class="p">,</span> <span class="s1">&#39;`.\{-}`&#39;</span><span class="p">)</span> <span class="p">!=</span> <span class="m">-1</span>
+</span><span class='line'>            <span class="k">let</span> snippet <span class="p">=</span> substitute<span class="p">(</span>snippet<span class="p">,</span> <span class="s1">&#39;`.\{-}`&#39;</span><span class="p">,</span>
+</span><span class='line'>                        \ substitute<span class="p">(</span>eval<span class="p">(</span>matchstr<span class="p">(</span>snippet<span class="p">,</span> <span class="s1">&#39;`\zs.\{-}\ze`&#39;</span><span class="p">)),</span>
+</span><span class='line'>                        \ <span class="c">&quot;\n\\%$&quot;, &#39;&#39;, &#39;&#39;), &#39;&#39;)</span>
+</span><span class='line'>        <span class="k">endw</span>
+</span><span class='line'>        <span class="k">let</span> snippet <span class="p">=</span> substitute<span class="p">(</span>snippet<span class="p">,</span> <span class="c">&quot;\r&quot;, &quot;\n&quot;, &#39;g&#39;)</span>
+</span><span class='line'>    <span class="k">endif</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>一開始是乖乖聽他的話用 <code>bundle exec rake</code> 來取代 <code>rake</code>，不過很快我就覺得這樣實在太麻煩了，解決方法很簡單，直接在 terminal 輸入：</p>
 
-<pre><code>bundle update rake
-</code></pre>
-
-<p>就可以了！</p>
+<p>沒意外的話應該會在第 81 行找到它的正規表示式 <code>`.\{-}`</code></p>
 </div>
 
 
@@ -123,12 +139,12 @@
   
 
 
-<time datetime="2012-04-17T00:06:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2012</time>
+<time datetime="2012-04-19T19:46:00+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/octopress/'>octopress</a>, <a class='category' href='/blog/categories/rake/'>rake</a>
+    <a class='category' href='/blog/categories/snipmate/'>snipmate</a>, <a class='category' href='/blog/categories/vim/'>vim</a>
   
 </span>
 
@@ -137,7 +153,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kusoayan.github.com/blog/2012/04/17/rake-0-dot-9-2-dot-2-vs-0-dot-9-2-error/" data-via="jrweizhang" data-counturl="http://kusoayan.github.com/blog/2012/04/17/rake-0-dot-9-2-dot-2-vs-0-dot-9-2-error/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kusoayan.github.com/blog/2012/04/19/snipmate-with-backticks/" data-via="jrweizhang" data-counturl="http://kusoayan.github.com/blog/2012/04/19/snipmate-with-backticks/" >Tweet</a>
   
   
   
@@ -148,10 +164,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/04/16/fuelphp-setup/" title="Previous Post: FuelPHP 安裝配置（一）">&laquo; FuelPHP 安裝配置（一）</a>
+        <a class="basic-alignment left" href="/blog/2012/04/17/octopress-content-manage-tool/" title="Previous Post: Octopress content manage tool">&laquo; Octopress content manage tool</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/04/17/octopress-content-manage-tool/" title="Next Post: Octopress content manage tool">Octopress content manage tool &raquo;</a>
       
     </p>
   </footer>
@@ -263,8 +277,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://kusoayan.github.com/blog/2012/04/17/rake-0-dot-9-2-dot-2-vs-0-dot-9-2-error/';
-        var disqus_url = 'http://kusoayan.github.com/blog/2012/04/17/rake-0-dot-9-2-dot-2-vs-0-dot-9-2-error/';
+        var disqus_identifier = 'http://kusoayan.github.com/blog/2012/04/19/snipmate-with-backticks/';
+        var disqus_url = 'http://kusoayan.github.com/blog/2012/04/19/snipmate-with-backticks/';
         var disqus_script = 'embed.js';
       
     (function () {

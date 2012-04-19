@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://kusoayan.github.com/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-19T19:28:01+08:00</updated>
+  <updated>2012-04-19T20:06:25+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[snipmate 反引號轉義]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/04/19/snipmate-with-backticks/"/>
+    <updated>2012-04-19T19:46:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/04/19/snipmate-with-backticks</id>
+    <content type="html"><![CDATA[<p>今天要幫 *.markdown 文件加入 snipMate 的 snippet 時，發現寫 snippet 時不能使用 <code>\`` 這個反引號（Backticks），而且當我加上</code> \ ` 來跳脫時也沒用，後來上網找了些資料再加上去看 snipMate.vim 中的寫法後才知道原來它根本沒加上跳脫的功能…囧
+解決辦法不難，在 snipMate.vim 中找到這段</p>
+
+<figure class='code'><figcaption><span>snipMate&#46;vim</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="c">&quot; Evaluate eval (`...`) expressions.</span>
+</span><span class='line'><span class="c">    &quot; Using a loop here instead of a regex fixes a bug with nested &quot;\=&quot;.</span>
+</span><span class='line'>    <span class="k">if</span> stridx<span class="p">(</span>snippet<span class="p">,</span> <span class="s1">&#39;`&#39;</span><span class="p">)</span> <span class="p">!=</span> <span class="m">-1</span>
+</span><span class='line'>        <span class="k">while</span> <span class="k">match</span><span class="p">(</span>snippet<span class="p">,</span> <span class="s1">&#39;`.\{-}`&#39;</span><span class="p">)</span> <span class="p">!=</span> <span class="m">-1</span>
+</span><span class='line'>            <span class="k">let</span> snippet <span class="p">=</span> substitute<span class="p">(</span>snippet<span class="p">,</span> <span class="s1">&#39;`.\{-}`&#39;</span><span class="p">,</span>
+</span><span class='line'>                        \ substitute<span class="p">(</span>eval<span class="p">(</span>matchstr<span class="p">(</span>snippet<span class="p">,</span> <span class="s1">&#39;`\zs.\{-}\ze`&#39;</span><span class="p">)),</span>
+</span><span class='line'>                        \ <span class="c">&quot;\n\\%$&quot;, &#39;&#39;, &#39;&#39;), &#39;&#39;)</span>
+</span><span class='line'>        <span class="k">endw</span>
+</span><span class='line'>        <span class="k">let</span> snippet <span class="p">=</span> substitute<span class="p">(</span>snippet<span class="p">,</span> <span class="c">&quot;\r&quot;, &quot;\n&quot;, &#39;g&#39;)</span>
+</span><span class='line'>    <span class="k">endif</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>沒意外的話應該會在第 81 行找到它的正規表示式 <code>`.\{-}`</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress content manage tool]]></title>
