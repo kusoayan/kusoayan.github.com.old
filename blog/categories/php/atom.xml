@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | My Octopress Blog]]></title>
   <link href="http://kusoayan.github.com/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-20T01:03:27+08:00</updated>
+  <updated>2012-04-20T01:05:31+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -36,8 +36,9 @@
 
 <p>// 或在 controller 中:
 \Package::load('email');
-```
-然後把 packages/email/config/email.php 複製到 app/config/email.php 作為預設的設定檔，其中有些參數可以調整，這裡就紀錄我有用到的部份：
+```</p>
+
+<p>然後把 packages/email/config/email.php 複製到 app/config/email.php 作為預設的設定檔，其中有些參數可以調整，這裡就紀錄我有用到的部份：
 1. drive：預設是 'mail' 不過因為我要透過 gmail 去寄信所以這裡改成 'smtp'
 2. smtp.host：預設為空，我改成了 gmail 的 'ssl://smtp.gmail.com'
 3. smtp.port：預設是 25，同樣改成了 gmail 的 465
@@ -97,10 +98,11 @@ catch(\EmailSendingFailedException $e)
 </code></pre>
 
 <p>}
-```
-當寄送郵件的時候，會有兩種例外狀況可以處理，分別是
-- \EmailValidationFailedException 當郵件地址格式沒通過驗證的時候
-- \EmailSendingFailedException 當 driver 沒有成功運行的時候</p>
+```</p>
+
+<p>當寄送郵件的時候，會有兩種例外狀況可以處理，分別是
+1. \EmailValidationFailedException 當郵件地址格式沒通過驗證的時候
+2. \EmailSendingFailedException 當 driver 沒有成功運行的時候</p>
 
 <p>基本上我就用到這些了，不過如果要再更實用點的話，其實可以設定 html_body：
 <code>php
