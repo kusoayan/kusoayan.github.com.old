@@ -4,7 +4,7 @@
   <title><![CDATA[Category: fuelphp | Lazy is good]]></title>
   <link href="http://kusoayan.github.com/blog/categories/fuelphp/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-20T14:28:38+08:00</updated>
+  <updated>2012-04-20T14:30:16+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -133,12 +133,10 @@ $email-&gt;html_body(\View::forge('email/template', $email_data));
 <p>按照官方網站上的說明，可以藉由兩種方式來安裝：</p>
 
 <ol>
-<li><p>直接透過指令安裝：</p>
-
-<p> <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ curl get.fuelphp.com/oil | sh</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p> 這種方式目前只在 *nix 系統（Linux、OS X、Unix、etc.）上可以使用，下了指令之後，他會自己把 oil 這個 shell-script 抓下來然後安裝到你的 /usr/bin 底下，也因此過程中他會需要你的密碼來授權。裝完之後可以看一下這個 shell-script 到底幹了什麼事情；
+<li><p>直接透過指令安裝：
+ <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ curl get.fuelphp.com/oil | sh</span></code></pre></td></tr></table></div></figure></notextile></div>
+ 這種方式目前只在 *nix 系統（Linux、OS X、Unix、etc.）上可以使用，下了指令之後，他會自己把 oil 這個 shell-script 抓下來然後安裝到你的 /usr/bin 底下，也因此過程中他會需要你的密碼來授權。裝完之後可以看一下這個 shell-script 到底幹了什麼事情；
  <div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>oil bash </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -191,9 +189,8 @@ $email-&gt;html_body(\View::forge('email/template', $email_data));
 </span><span class='line'>     fi
 </span><span class='line'>&lt;/code>&lt;/pre>
 </span><span class='line'>
-</span><span class='line'>&lt;p> fi</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p> 其實就只是當你下指令 <code>oil create</code> 時去 clone 一份 FuelPHP Framework 的檔案回來，然後如果資料夾底下有 oil 這個檔案時，會自動幫你把 <code>oil</code> alias 到 <code>php oil</code>，也就是你可以直接用 <code>oil</code> 這個指令替代 <code>php oil</code>！</p></li>
+</span><span class='line'>&lt;p> fi</span></code></pre></td></tr></table></div></figure></notextile></div>
+ 其實就只是當你下指令 <code>oil create</code> 時去 clone 一份 FuelPHP Framework 的檔案回來，然後如果資料夾底下有 oil 這個檔案時，會自動幫你把 <code>oil</code> alias 到 <code>php oil</code>，也就是你可以直接用 <code>oil</code> 這個指令替代 <code>php oil</code>！</p></li>
 <li><p>手動安裝</p>
 
 <ol>
@@ -201,17 +198,19 @@ $email-&gt;html_body(\View::forge('email/template', $email_data));
 <li>把它解壓縮</li>
 <li><p>把解壓縮後的資料夾移到你的 Server 上，結構大概如下：</p>
 
-<blockquote><p>/</p>
+<blockquote><p>fuel/</p>
 
-<p>fuel/
-   app/
+<p>   app/
    core/
-   packages/
-public/
-   .htaccess
+   packages/</p>
+
+<p>public/</p>
+
+<p>   .htaccess
    assets/
-   index.php
-oil</p></blockquote></li>
+   index.php</p>
+
+<p>oil</p></blockquote></li>
 <li><p>設定資料夾的讀寫權限，可以手動或是執行底下的指令：
 <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -228,14 +227,10 @@ oil</p></blockquote></li>
 </span><span class='line'> Made writable: APPPATH/tmp
 </span><span class='line'>&lt;/code>&lt;/pre>
 </span><span class='line'>
-</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p></li>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div>
+TEST</p></li>
 </ol>
-
-
-<p> test here
- <del>
- haha
- </del></p></li>
+</li>
 </ol>
 
 ]]></content>
