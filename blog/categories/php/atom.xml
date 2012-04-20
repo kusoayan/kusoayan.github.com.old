@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | Lazy is good]]></title>
   <link href="http://kusoayan.github.com/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-20T14:03:12+08:00</updated>
+  <updated>2012-04-20T14:04:15+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -133,40 +133,46 @@ $email-&gt;html_body(\View::forge('email/template', $email_data));
 <p>按照官方網站上的說明，可以藉由兩種方式來安裝：</p>
 
 <ol>
-<li><p>直接透過指令安裝：
-<code>$ curl get.fuelphp.com/oil | sh`</code></p>
+<li>直接透過指令安裝：</li>
+</ol>
 
-<p>  這種方式目前只在 *nix 系統（Linux、OS X、Unix、etc.）上可以使用，下了指令之後，他會自己把 oil 這個 shell-script 抓下來然後安裝到你的 /usr/bin 底下，也因此過程中他會需要你的密碼來授權。裝完之後可以看一下這個 shell-script 到底幹了什麼事情；
-``` bash oil
-  #!/bin/bash</p>
 
-<p>  if [ -f "./oil" ]; then</p>
+<p><code>$ curl get.fuelphp.com/oil | sh`</code></p>
 
-<pre><code>      php oil "$@"
+<pre><code>這種方式目前只在 \*nix 系統（Linux、OS X、Unix、etc.）上可以使用，下了指令之後，他會自己把 oil 這個 shell-script 抓下來然後安裝到你的 /usr/bin 底下，也因此過程中他會需要你的密碼來授權。裝完之後可以看一下這個 shell-script 到底幹了什麼事情；
 </code></pre>
 
-<p>  else</p>
+<p>``` bash oil</p>
 
-<pre><code>      if [ "$1" == "create" ]; then
+<pre><code>#!/bin/bash
 
-              if [ ! `which git` ]; then 
-                  echo "For this installer to work you'll need to install Git."
-                  echo '        http://git-scm.com/'
-              fi
+if [ -f "./oil" ]; then
+        php oil "$@"
+else
 
-              git clone --recursive git://github.com/fuel/fuel.git "./$2"
-              php "./$2/oil" refine install
-      else
-              echo 'This is not a valid Fuel installation so Oil is a bit lost.'
-              echo '        http://fuelphp.com/docs/installation/instructions.html'
+        if [ "$1" == "create" ]; then
 
-      fi
+                if [ ! `which git` ]; then 
+                    echo "For this installer to work you'll need to install Git."
+                    echo '        http://git-scm.com/'
+                fi
+
+                git clone --recursive git://github.com/fuel/fuel.git "./$2"
+                php "./$2/oil" refine install
+        else
+                echo 'This is not a valid Fuel installation so Oil is a bit lost.'
+                echo '        http://fuelphp.com/docs/installation/instructions.html'
+
+        fi
+fi
 </code></pre>
 
-<p>  fi
-```</p>
+<p>```</p>
 
-<p>  其實就只是當你下指令 <code>oil create</code> 時去 clone 一份 FuelPHP Framework 的檔案回來，然後如果資料夾底下有 oil 這個檔案時，會自動幫你把 <code>oil</code> alias 到 <code>php oil</code>，也就是你可以直接用 <code>oil</code> 這個指令替代 <code>php oil</code>！</p></li>
+<pre><code>其實就只是當你下指令 `oil create` 時去 clone 一份 FuelPHP Framework 的檔案回來，然後如果資料夾底下有 oil 這個檔案時，會自動幫你把 `oil` alias 到 `php oil`，也就是你可以直接用 `oil` 這個指令替代 `php oil`！
+</code></pre>
+
+<ol>
 <li><p>手動安裝</p>
 
 <ol>
@@ -174,23 +180,15 @@ $email-&gt;html_body(\View::forge('email/template', $email_data));
 <li>把它解壓縮</li>
 <li>把解壓縮後的資料夾移到你的 Server 上，結構大概如下：
 
-<blockquote><p>/</p>
-
-<p>   fuel/</p>
-
-<pre><code>   app/
+<blockquote><p>fuel/
+   app/
    core/
    packages/
-</code></pre>
-
-<p>   public/</p>
-
-<pre><code>   .htaccess
+public/
+   .htaccess
    assets/
    index.php
-</code></pre>
-
-<p>   oil</p></blockquote></li>
+oil</p></blockquote></li>
 <li>設定資料夾的讀寫權限，可以手動或是執行底下的指令：</li>
 </ol>
 </li>

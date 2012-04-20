@@ -7,7 +7,7 @@
     <meta name="author" content="Lazy Wei">
 
     
-    <meta name="description" content="FuelPHP 安裝配置（一） 這系列記一下 FuelPHP 的安裝配置步驟，config、orm、auth、oil 等。 按照官方網站上的說明，可以藉由兩種方式來安裝： 直接透過指令安裝： &#8220;` $ curl get.fuelphp.com/oil | sh` &#8220;` &hellip;">
+    <meta name="description" content="FuelPHP 安裝配置（一） 這系列記一下 FuelPHP 的安裝配置步驟，config、orm、auth、oil 等。 按照官方網站上的說明，可以藉由兩種方式來安裝： 直接透過指令安裝： $ curl get.fuelphp.com/oil | sh` 這種方式目前只在 \*nix 系統（ &hellip;">
     
     <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
 
@@ -62,43 +62,64 @@
 <p>按照官方網站上的說明，可以藉由兩種方式來安裝：</p>
 
 <ol>
-<li><p>直接透過指令安裝：
- &#8220;`</p>
+<li>直接透過指令安裝：</li>
+</ol>
 
-<pre><code> $ curl get.fuelphp.com/oil | sh` 
+
+<p><code>$ curl get.fuelphp.com/oil | sh`</code></p>
+
+<pre><code>這種方式目前只在 \*nix 系統（Linux、OS X、Unix、etc.）上可以使用，下了指令之後，他會自己把 oil 這個 shell-script 抓下來然後安裝到你的 /usr/bin 底下，也因此過程中他會需要你的密碼來授權。裝完之後可以看一下這個 shell-script 到底幹了什麼事情；
 </code></pre>
 
-<p> &#8220;`</p>
+<figure class='code'><figcaption><span>oil</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> -f <span class="s2">&quot;./oil&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">        </span>php oil <span class="s2">&quot;$@&quot;</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">        if</span> <span class="o">[</span> <span class="s2">&quot;$1&quot;</span> <span class="o">==</span> <span class="s2">&quot;create&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">    </span>
+</span><span class='line'><span class="k">                if</span> <span class="o">[</span> ! <span class="sb">`</span>which git<span class="sb">`</span> <span class="o">]</span>; <span class="k">then </span>
+</span><span class='line'><span class="k">                    </span><span class="nb">echo</span> <span class="s2">&quot;For this installer to work you&#39;ll need to install Git.&quot;</span>
+</span><span class='line'>                    <span class="nb">echo</span> <span class="s1">&#39;        http://git-scm.com/&#39;</span>
+</span><span class='line'>                <span class="k">fi</span>
+</span><span class='line'><span class="k">                </span>
+</span><span class='line'><span class="k">                </span>git clone --recursive git://github.com/fuel/fuel.git <span class="s2">&quot;./$2&quot;</span>
+</span><span class='line'>                php <span class="s2">&quot;./$2/oil&quot;</span> refine install
+</span><span class='line'>        <span class="k">else</span>
+</span><span class='line'><span class="k">                </span><span class="nb">echo</span> <span class="s1">&#39;This is not a valid Fuel installation so Oil is a bit lost.&#39;</span>
+</span><span class='line'>                <span class="nb">echo</span> <span class="s1">&#39;        http://fuelphp.com/docs/installation/instructions.html&#39;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">fi</span>
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p> 這種方式目前只在 *nix 系統（Linux、OS X、Unix、etc.）上可以使用，下了指令之後，他會自己把 oil 這個 shell-script 抓下來然後安裝到你的 /usr/bin 底下，也因此過程中他會需要你的密碼來授權。裝完之後可以看一下這個 shell-script 到底幹了什麼事情；
- &#8220;` bash oil</p>
 
-<pre><code> #!/bin/bash
-
- if [ -f "./oil" ]; then
-         php oil "$@"
- else
-
-         if [ "$1" == "create" ]; then
-
-                 if [ ! `which git` ]; then 
-                     echo "For this installer to work you'll need to install Git."
-                     echo '        http://git-scm.com/'
-                 fi
-
-                 git clone --recursive git://github.com/fuel/fuel.git "./$2"
-                 php "./$2/oil" refine install
-         else
-                 echo 'This is not a valid Fuel installation so Oil is a bit lost.'
-                 echo '        http://fuelphp.com/docs/installation/instructions.html'
-
-         fi
- fi
+<pre><code>其實就只是當你下指令 `oil create` 時去 clone 一份 FuelPHP Framework 的檔案回來，然後如果資料夾底下有 oil 這個檔案時，會自動幫你把 `oil` alias 到 `php oil`，也就是你可以直接用 `oil` 這個指令替代 `php oil`！
 </code></pre>
 
-<p> &#8220;`</p>
-
-<p> 其實就只是當你下指令 <code>oil create</code> 時去 clone 一份 FuelPHP Framework 的檔案回來，然後如果資料夾底下有 oil 這個檔案時，會自動幫你把 <code>oil</code> alias 到 <code>php oil</code>，也就是你可以直接用 <code>oil</code> 這個指令替代 <code>php oil</code>！</p></li>
+<ol>
 <li><p>手動安裝</p>
 
 <ol>
@@ -106,32 +127,30 @@
 <li>把它解壓縮</li>
 <li>把解壓縮後的資料夾移到你的 Server 上，結構大概如下：
 
-<blockquote><p>/
-   fuel/</p>
-
-<pre><code>   app/
+<blockquote><p>fuel/
+   app/
    core/
    packages/
-</code></pre>
-
-<p>   public/</p>
-
-<pre><code>   .htaccess
+public/
+   .htaccess
    assets/
    index.php
-</code></pre>
-
-<p>   oil</p></blockquote></li>
-<li>設定資料夾的讀寫權限，可以手動或是執行底下的指令：
-<code>
-$ php oil refine install
- Made writable: APPPATH/cache
- Made writable: APPPATH/logs
- Made writable: APPPATH/tmp
-</code></li>
+oil</p></blockquote></li>
+<li>設定資料夾的讀寫權限，可以手動或是執行底下的指令：</li>
 </ol>
 </li>
 </ol>
+
+
+<figure class='code'><figcaption><span>oil</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>php oil refine install
+</span><span class='line'>    Made writable: APPPATH/cache
+</span><span class='line'>    Made writable: APPPATH/logs
+</span><span class='line'>    Made writable: APPPATH/tmp
+</span></code></pre></td></tr></table></div></figure>
 
 </div>
     <div class="meta">
