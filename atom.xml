@@ -4,7 +4,7 @@
   <title><![CDATA[Lazy is good]]></title>
   <link href="http://kusoayan.github.com/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-20T14:19:56+08:00</updated>
+  <updated>2012-04-20T14:21:20+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -231,32 +231,58 @@
 
 <p> <code>$ curl get.fuelphp.com/oil | sh</code></p>
 
-<p> 這種方式目前只在 *nix 系統（Linux、OS X、Unix、etc.）上可以使用，下了指令之後，他會自己把 oil 這個 shell-script 抓下來然後安裝到你的 /usr/bin 底下，也因此過程中他會需要你的密碼來授權。裝完之後可以看一下這個 shell-script 到底幹了什麼事情；</p>
+<p> 這種方式目前只在 *nix 系統（Linux、OS X、Unix、etc.）上可以使用，下了指令之後，他會自己把 oil 這個 shell-script 抓下來然後安裝到你的 /usr/bin 底下，也因此過程中他會需要你的密碼來授權。裝完之後可以看一下這個 shell-script 到底幹了什麼事情；</p></li>
+</ol>
 
-<pre><code> #!/bin/bash
 
- if [ -f "./oil" ]; then
-         php oil "$@"
- else
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/bash
+</span><span class='line'>
+</span><span class='line'>    if [ -f "./oil" ]; then
+</span><span class='line'>            php oil "$@"
+</span><span class='line'>    else
+</span><span class='line'>
+</span><span class='line'>            if [ "$1" == "create" ]; then
+</span><span class='line'>        
+</span><span class='line'>                    if [ ! `which git` ]; then 
+</span><span class='line'>                        echo "For this installer to work you'll need to install Git."
+</span><span class='line'>                        echo '        http://git-scm.com/'
+</span><span class='line'>                    fi
+</span><span class='line'>                    
+</span><span class='line'>                    git clone --recursive git://github.com/fuel/fuel.git "./$2"
+</span><span class='line'>                    php "./$2/oil" refine install
+</span><span class='line'>            else
+</span><span class='line'>                    echo 'This is not a valid Fuel installation so Oil is a bit lost.'
+</span><span class='line'>                    echo '        http://fuelphp.com/docs/installation/instructions.html'
+</span><span class='line'>
+</span><span class='line'>            fi
+</span><span class='line'>    fi</span></code></pre></td></tr></table></div></figure>
 
-         if [ "$1" == "create" ]; then
 
-                 if [ ! `which git` ]; then 
-                     echo "For this installer to work you'll need to install Git."
-                     echo '        http://git-scm.com/'
-                 fi
-
-                 git clone --recursive git://github.com/fuel/fuel.git "./$2"
-                 php "./$2/oil" refine install
-         else
-                 echo 'This is not a valid Fuel installation so Oil is a bit lost.'
-                 echo '        http://fuelphp.com/docs/installation/instructions.html'
-
-         fi
- fi
+<pre><code>其實就只是當你下指令 `oil create` 時去 clone 一份 FuelPHP Framework 的檔案回來，然後如果資料夾底下有 oil 這個檔案時，會自動幫你把 `oil` alias 到 `php oil`，也就是你可以直接用 `oil` 這個指令替代 `php oil`！
 </code></pre>
 
-<p> 其實就只是當你下指令 <code>oil create</code> 時去 clone 一份 FuelPHP Framework 的檔案回來，然後如果資料夾底下有 oil 這個檔案時，會自動幫你把 <code>oil</code> alias 到 <code>php oil</code>，也就是你可以直接用 <code>oil</code> 這個指令替代 <code>php oil</code>！</p></li>
+<ol>
 <li><p>手動安裝</p>
 
 <ol>
@@ -273,17 +299,22 @@ public/
    assets/
    index.php
 oil</p></blockquote></li>
-<li><p>設定資料夾的讀寫權限，可以手動或是執行底下的指令：</p>
-
-<p> $ php oil refine install</p>
-
-<pre><code> Made writable: APPPATH/cache
- Made writable: APPPATH/logs
- Made writable: APPPATH/tmp
-</code></pre></li>
+<li><p>設定資料夾的讀寫權限，可以手動或是執行底下的指令：</p></li>
 </ol>
 </li>
 </ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ php oil refine install
+</span><span class='line'>            Made writable: APPPATH/cache
+</span><span class='line'>            Made writable: APPPATH/logs
+</span><span class='line'>            Made writable: APPPATH/tmp</span></code></pre></td></tr></table></div></figure>
+
+
 
 ]]></content>
   </entry>
