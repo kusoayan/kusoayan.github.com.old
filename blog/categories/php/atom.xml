@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | Lazy is good]]></title>
   <link href="http://kusoayan.github.com/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-20T14:27:49+08:00</updated>
+  <updated>2012-04-20T14:28:38+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -201,7 +201,9 @@ $email-&gt;html_body(\View::forge('email/template', $email_data));
 <li>把它解壓縮</li>
 <li><p>把解壓縮後的資料夾移到你的 Server 上，結構大概如下：</p>
 
-<blockquote><p>fuel/
+<blockquote><p>/</p>
+
+<p>fuel/
    app/
    core/
    packages/
@@ -228,7 +230,12 @@ oil</p></blockquote></li>
 </span><span class='line'>
 </span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p></li>
 </ol>
-</li>
+
+
+<p> test here
+ <del>
+ haha
+ </del></p></li>
 </ol>
 
 ]]></content>

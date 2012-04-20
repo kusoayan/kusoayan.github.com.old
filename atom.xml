@@ -4,7 +4,7 @@
   <title><![CDATA[Lazy is good]]></title>
   <link href="http://kusoayan.github.com/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-20T14:27:49+08:00</updated>
+  <updated>2012-04-20T14:28:38+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -294,7 +294,9 @@
 <li>把它解壓縮</li>
 <li><p>把解壓縮後的資料夾移到你的 Server 上，結構大概如下：</p>
 
-<blockquote><p>fuel/
+<blockquote><p>/</p>
+
+<p>fuel/
    app/
    core/
    packages/
@@ -319,7 +321,11 @@ oil</p></blockquote></li>
 </span><span class='line'>            Made writable: APPPATH/tmp</span></code></pre></td></tr></table></div></figure>
 
 
-
+<pre><code>test here
+~~~~
+haha
+~~~~
+</code></pre>
 ]]></content>
   </entry>
   
