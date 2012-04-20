@@ -4,7 +4,7 @@
   <title><![CDATA[Category: fuelphp | Lazy is good]]></title>
   <link href="http://kusoayan.github.com/blog/categories/fuelphp/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-20T13:45:36+08:00</updated>
+  <updated>2012-04-20T13:57:59+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -136,12 +136,13 @@ $email-&gt;html_body(\View::forge('email/template', $email_data));
 <li><p>直接透過指令安裝：
  ```</p>
 
-<pre><code> $ curl get.fuelphp.com/oil | sh`
+<pre><code> $ curl get.fuelphp.com/oil | sh` 
 </code></pre>
 
- <code>
- 這種方式目前只在 \*nix 系統（Linux、OS X、Unix、etc.）上可以使用，下了指令之後，他會自己把 oil 這個 shell-script 抓下來然後安裝到你的 `/usr/bin` 底下，也因此過程中他會需要你的密碼來授權。裝完之後可以看一下這個 shell-script 到底幹了什麼事情；
-</code> bash oil
+<p> ```</p>
+
+<p> 這種方式目前只在 *nix 系統（Linux、OS X、Unix、etc.）上可以使用，下了指令之後，他會自己把 oil 這個 shell-script 抓下來然後安裝到你的 /usr/bin 底下，也因此過程中他會需要你的密碼來授權。裝完之後可以看一下這個 shell-script 到底幹了什麼事情；
+ ``` bash oil</p>
 
 <pre><code> #!/bin/bash
 
@@ -166,8 +167,41 @@ $email-&gt;html_body(\View::forge('email/template', $email_data));
  fi
 </code></pre>
 
-<p> ```</p></li>
-<li><p>手動安裝</p></li>
+<p> ```</p>
+
+<p> 其實就只是當你下指令 <code>oil create</code> 時去 clone 一份 FuelPHP Framework 的檔案回來，然後如果資料夾底下有 oil 這個檔案時，會自動幫你把 <code>oil</code> alias 到 <code>php oil</code>，也就是你可以直接用 <code>oil</code> 這個指令替代 <code>php oil</code>！</p></li>
+<li><p>手動安裝</p>
+
+<ol>
+<li>先下載 <a href="http://docs.fuelphp.com/installation/download.html">FeulPHP</a></li>
+<li>把它解壓縮</li>
+<li>把解壓縮後的資料夾移到你的 Server 上，結構大概如下：
+
+<blockquote><p>/
+   fuel/</p>
+
+<pre><code>   app/
+   core/
+   packages/
+</code></pre>
+
+<p>   public/</p>
+
+<pre><code>   .htaccess
+   assets/
+   index.php
+</code></pre>
+
+<p>   oil</p></blockquote></li>
+<li>設定資料夾的讀寫權限，可以手動或是執行底下的指令：
+<code>
+$ php oil refine install
+ Made writable: APPPATH/cache
+ Made writable: APPPATH/logs
+ Made writable: APPPATH/tmp
+</code></li>
+</ol>
+</li>
 </ol>
 
 ]]></content>
