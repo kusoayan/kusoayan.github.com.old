@@ -52,21 +52,6 @@
 </div>
 
 </header>
-	
-<div id="banner" class="inner">
-	<div class="container">
-		<ul class="feed"></ul>
-	</div>
-	<small><a href="http://twitter.com/jrweizhang">jrweizhang</a> @ <a href="http://twitter.com">Twitter</a></small>
-	<div class="loading">Loading...</div>
-</div>
-<script src="/javascripts/twitter.js"></script>
-<script type="text/javascript">
-	(function($){
-		$('#banner').getTwitterFeed('jrweizhang', 4, false);
-	})(jQuery);
-</script>
-
 	<div id="content" class="inner"><article class="post">
     <h1 class="title">Snipmate 反引號轉義</h1>
     <div class="entry"><p>今天要幫 *.markdown 文件加入 snipMate 的 snippet 時，發現寫 snippet 時不能使用 ` 這個反引號（Backticks），而且當我加上 \ 來跳脫時也沒用，後來上網找了些資料再加上去看 snipMate.vim 中的寫法後才知道原來它根本沒加上跳脫的功能…囧
