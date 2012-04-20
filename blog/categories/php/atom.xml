@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | Lazy is good]]></title>
   <link href="http://kusoayan.github.com/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-20T14:21:20+08:00</updated>
+  <updated>2012-04-20T14:27:49+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -135,10 +135,12 @@ $email-&gt;html_body(\View::forge('email/template', $email_data));
 <ol>
 <li><p>直接透過指令安裝：</p>
 
-<p> <code>$ curl get.fuelphp.com/oil | sh</code></p>
+<p> <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ curl get.fuelphp.com/oil | sh</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p> 這種方式目前只在 *nix 系統（Linux、OS X、Unix、etc.）上可以使用，下了指令之後，他會自己把 oil 這個 shell-script 抓下來然後安裝到你的 /usr/bin 底下，也因此過程中他會需要你的密碼來授權。裝完之後可以看一下這個 shell-script 到底幹了什麼事情；
- <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+ <div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>oil bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
