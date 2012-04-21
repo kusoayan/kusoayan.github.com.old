@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: git | Lazy is good]]></title>
+  <link href="http://kusoayan.github.com/blog/categories/git/atom.xml" rel="self"/>
+  <link href="http://kusoayan.github.com/"/>
+  <updated>2012-04-21T22:36:43+08:00</updated>
+  <id>http://kusoayan.github.com/</id>
+  <author>
+    <name><![CDATA[Lazy Wei]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[github fork 後與原 project 同步]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/04/21/github-fork-sync/"/>
+    <updated>2012-04-21T10:39:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/04/21/github-fork-sync</id>
+    <content type="html"><![CDATA[<p>在 github 上 fork 完一個 project 之後，是不會自動跟原本的 project 保持同步的，也就是說如果今天 fork 回來之後，原本的 project 又改了某些東西，那這些修改是不會出現在你的 fork 回來的 project 當中。
+所以需要一些操作來讓其同步，首先 cd 進 git repo 的目錄：</p>
+
+<!-- more -->
+
+
+<p><code>cd some-project</code></p>
+
+<p>然後將原本的 project 加入 remote 中</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git remote add the-original-repo https://github.com/aaaaa/bbbbb.git #最後這裡是原本 project 的 github 位置
+</span><span class='line'>git pull the-original-repo master</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>這樣就可以了！</p>
+]]></content>
+  </entry>
+  
+</feed>
