@@ -4,7 +4,7 @@
   <title><![CDATA[Category: fuelphp | Lazy is good]]></title>
   <link href="http://kusoayan.github.com/blog/categories/fuelphp/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-21T22:36:43+08:00</updated>
+  <updated>2012-04-21T22:40:07+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -243,43 +243,74 @@ index.php
     <id>http://kusoayan.github.com/blog/2012/04/16/fuelphp-json</id>
     <content type="html"><![CDATA[<p>在寫台大竹友會的竹塹周網站時，剛好有要用到 FuelPHP 的 json 回傳，
 所以這邊就簡單的紀錄一下，
-要在 FuelPHP 中使用 json 非常簡單，在 FuelPHP 的官方 docs 中有<a href="http://docs.fuelphp.com/general/controllers/rest.html">提到</a>，你可以建立一個 Controller 去 extends Controller_Rest，像是：
-``` php
-&lt;?php
-class Controller_Items extends Controller_Rest
-{</p>
+要在 FuelPHP 中使用 json 非常簡單，在 FuelPHP 的官方 docs 中有<a href="http://docs.fuelphp.com/general/controllers/rest.html">提到</a>，你可以建立一個 Controller 去 extends Controller_Rest，像是：</p>
 
-<pre><code>public function post_list()
-{
-    $items = Model_Item::find('all');
-    $data = array();
-
-    $i = 0;
-    foreach ($items as $item)
-    {
-        $data[$i]['item_id'] = $item-&gt;id;
-        $data[$i]['item_name'] = $item-&gt;name;
-        $data[$i++]['item_price'] = $item-&gt;price;
-    }
-
-    $this-&gt;response(array(
-                'items' =&gt; $data,
-                ));
-}
-</code></pre>
-
-<p>}
-```
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">&amp;lt;?php&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;class Controller_Items extends Controller_Rest</span>
+</span><span class='line'><span class="x">{&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;pre&gt;&lt;code&gt;public function post_list()</span>
+</span><span class='line'><span class="x">{</span>
+</span><span class='line'><span class="x">    $items = Model_Item::find(&#39;all&#39;);</span>
+</span><span class='line'><span class="x">    $data = array();</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">    $i = 0;</span>
+</span><span class='line'><span class="x">    foreach ($items as $item)</span>
+</span><span class='line'><span class="x">    {</span>
+</span><span class='line'><span class="x">        $data[$i][&#39;item_id&#39;] = $item-&amp;gt;id;</span>
+</span><span class='line'><span class="x">        $data[$i][&#39;item_name&#39;] = $item-&amp;gt;name;</span>
+</span><span class='line'><span class="x">        $data[$i++][&#39;item_price&#39;] = $item-&amp;gt;price;</span>
+</span><span class='line'><span class="x">    }</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">    $this-&amp;gt;response(array(</span>
+</span><span class='line'><span class="x">                &#39;items&#39; =&amp;gt; $data,</span>
+</span><span class='line'><span class="x">                ));</span>
+</span><span class='line'><span class="x">}</span>
+</span><span class='line'><span class="x">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 這是我在竹友會網站中應用到的例子。</p>
 
 <p>接著就可以用 http://your.domain/items/list.json 來取得 json 物件。</p>
 
-<p>另外值得一提的是，你會發現這時候 method 的開頭並不是 action<em>，而是 post</em>，其實這表示你限定可以傳入資料的型式，你可以用的有：
-* GET
-* POST
-* PUT
-* DELETE
-後面兩種是比較少用到，而且大多數瀏覽器也都不支援的！</p>
+<p>另外值得一提的是，你會發現這時候 method 的開頭並不是 action_，而是 post_，其實這表示你限定可以傳入資料的型式，你可以用的有：</p>
+
+<ul>
+<li>GET</li>
+<li>POST</li>
+<li>PUT</li>
+<li>DELETE</li>
+</ul>
+
+
+<p>後面兩種是比較少用到，而且大多數瀏覽器也都不支援的！</p>
 ]]></content>
   </entry>
   
