@@ -1,0 +1,278 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>fuelphp 新增（修改）欄位 - Lazy is good</title>
+    <meta name="author" content="Lazy Wei">
+
+    
+    <meta name="description" content="Fuelphp 新增（修改）欄位 這次就來記一下 FuelPHP 的 migration。 用 oil generate 建完一大堆 Model、DB Table 之後，如果想更改、新增欄位怎麼辦？ 這時候就可以用 FuelPHP 強大的 migration 功能！ 首先先建立一個 &hellip;">
+    
+    <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
+
+    <link href="false" rel="alternate" title="Lazy is good" type="application/atom+xml">
+    <link rel="canonical" href="">
+    <link href="/favicon.png" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+
+</head>
+
+<body>
+	<header class="inner"><h1 class="left"><a href="/">Lazy is good</a></h1>
+<nav class="menu left"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about-me">Resume</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<div class="right">
+	<form class="search right" action="http://google.com/search" method="get">
+		<input class="left" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:kusoayan.github.com">
+	</form>
+	<div class="social right">
+		
+		<a class="facebook" href="http://www.facebook.com/kusoayan" title="Facebook">Facebook</a>
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/jrweizhang" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/kusoayan" title="GitHub">GitHub</a>
+		
+		
+		
+	</div>
+</div>
+
+</header>
+	<div id="content" class="inner"><article class="post">
+    <h1 class="title">Fuelphp 新增（修改）欄位</h1>
+    <div class="entry"><p>這次就來記一下 FuelPHP 的 migration。</p>
+
+<p>用 <code>oil generate</code> 建完一大堆 Model、DB Table 之後，如果想更改、新增欄位怎麼辦？</p>
+
+<!-- more -->
+
+
+<p>這時候就可以用 FuelPHP 強大的 migration 功能！</p>
+
+<p>首先先建立一個 migration 的檔案在 app/migrations 底下，開頭請照順序 001~999 這樣編號，不能跳號、也不能有重複的，舉個例子，</p>
+
+<p>這是 OK 的：</p>
+
+<ul>
+<li>migrations/
+
+<ul>
+<li>001_create_users.php</li>
+<li>002_create_items.php</li>
+</ul>
+</li>
+</ul>
+
+
+<p>這是不 OK 的：</p>
+
+<ul>
+<li>migrations/
+
+<ul>
+<li>001_create_users.php</li>
+<li>002_create_items.php</li>
+<li>002_create_books.php</li>
+<li>004_create_stores.php</li>
+</ul>
+</li>
+</ul>
+
+
+<p>接著，這個 migration 檔案的內容可以參考下列格式</p>
+
+<figure class='code'><figcaption><span>006_example.php  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">namespace</span> <span class="nx">Fuel\Migrations</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Example</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">up</span><span class="p">()</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="nx">\DBUtil</span><span class="o">::</span><span class="na">create_table</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>          <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&gt;</span> <span class="mi">11</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;int&#39;</span><span class="p">,</span> <span class="s1">&#39;auto_increment&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">),</span>
+</span><span class='line'>          <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&gt;</span> <span class="mi">50</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;varchar&#39;</span><span class="p">),</span>
+</span><span class='line'>          <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&gt;</span> <span class="mi">255</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;varchar&#39;</span><span class="p">),</span>
+</span><span class='line'>          <span class="s1">&#39;group&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&gt;</span> <span class="mi">11</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;int&#39;</span><span class="p">),</span>
+</span><span class='line'>          <span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&gt;</span> <span class="mi">255</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;varchar&#39;</span><span class="p">),</span>
+</span><span class='line'>          <span class="s1">&#39;last_login&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&gt;</span> <span class="mi">11</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;int&#39;</span><span class="p">),</span>
+</span><span class='line'>          <span class="s1">&#39;login_hash&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&gt;</span> <span class="mi">255</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;varchar&#39;</span><span class="p">),</span>
+</span><span class='line'>          <span class="s1">&#39;profile_fields&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;text&#39;</span><span class="p">),</span>
+</span><span class='line'>          <span class="s1">&#39;created_at&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&gt;</span> <span class="mi">11</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;int&#39;</span><span class="p">),</span>
+</span><span class='line'>          <span class="s1">&#39;updated_at&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&gt;</span> <span class="mi">11</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;int&#39;</span><span class="p">),</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="p">),</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">));</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">down</span><span class="p">()</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="nx">\DBUtil</span><span class="o">::</span><span class="na">drop_table</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>首先注意到的是，會有兩個 method：up 還有 down，分別是讓 oil 可以知道怎麼執行或是反執行這個 migration，也就是說每個 migration 的動作都是可逆的！
+再來是新增欄位的方式，可以參考 FuelPHP 的 <a href="http://docs.fuelphp.com/classes/database/dbutil.html#/method_add_fields">DBUtil</a></p>
+
+<figure class='code'><figcaption><span>add fiel  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">\DBUtil</span><span class="o">::</span><span class="na">add</span><span class="nx">\_fields</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="s1">&#39;surname&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&gt;</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;varchar&#39;</span><span class="p">),</span>
+</span><span class='line'>    <span class="s1">&#39;twitter_name&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&gt;</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;varchar&#39;</span><span class="p">),</span>
+</span><span class='line'><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>別忘了在 down method 中加入反操作</p>
+
+<figure class='code'><figcaption><span>drop fiel  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'>    <span class="nx">\DBUtil</span><span class="o">::</span><span class="na">drop</span><span class="nx">\_fields</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="s1">&#39;surname&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>當 migration 的檔案建立好之後，就可以直接使用 oil 來幫你處理剩下的事情了！</p>
+
+<p><code>php oil refine migrate</code></p>
+
+<p>這個指令會讓 oil 自動 migrate 到最新的版本，當然你也可以自己指定版本或是其他操作：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ php oil refine migrate:current
+</span><span class='line'>$ php oil refine migrate:up
+</span><span class='line'>$ php oil refine migrate:down
+</span><span class='line'>$ php oil refine migrate --version=10</span></code></pre></td></tr></table></div></figure>
+
+
+<p>這樣 database 的 table 就都弄好了，接下來記得修改一下你的 model，通常需要加的是 validate 的部份，加上新的欄位的驗證方式！</p>
+
+<p>寫到這邊才發現其實 FuelPHP 的 <code>oil generate</code> 有更強大的功能…他可以幫你<a href="http://docs.fuelphp.com/packages/oil/generate.html#/migrations">產生 migrate 檔案</a> XD
+所以你就可以用這種更快速的方式來產生 migrations：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ php oil generate migration create_users name:text email:string[50] password:string[125]
+</span><span class='line'>$ php oil generate migration rename_table_users_to_accounts
+</span><span class='line'>$ php oil generate migration add_bio_to_accounts bio:text
+</span><span class='line'>$ php oil generate migration rename_field_name_to_username_in_accounts
+</span><span class='line'>$ php oil generate migration drop_accounts</span></code></pre></td></tr></table></div></figure>
+
+
+<p>簡直是太爽了XD</p>
+</div>
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-22T10:58:00+08:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2012</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/blog/categories/fuelphp/'>fuelphp</a>, <a class='category' href='/blog/categories/php/'>php</a>
+  
+</div>
+
+</div>
+        
+    </div>
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer class="inner">Copyright &copy; 2012 Lazy is good</footer>
+	<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'kusoayan';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://kusoayan.github.com/blog/2012/04/22/fuelphp-add-field/';
+        var disqus_url = 'http://kusoayan.github.com/blog/2012/04/22/fuelphp-add-field/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+</body>
+</html>

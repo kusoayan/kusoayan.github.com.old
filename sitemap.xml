@@ -18,7 +18,7 @@
     </url>
     <url>
         <loc>http://kusoayan.github.com/blog/2012/04/16/fuelphp-setup/</loc>
-        <lastmod>2012-04-20T14:47:29+08:00</lastmod>
+        <lastmod>2012-04-22T15:07:46+08:00</lastmod>
     </url>
     <url>
         <loc>
@@ -35,8 +35,16 @@
         <lastmod>2012-04-21T11:00:09+08:00</lastmod>
     </url>
     <url>
+        <loc>http://kusoayan.github.com/blog/2012/04/22/fuelphp-add-field/</loc>
+        <lastmod>2012-04-22T15:23:23+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://kusoayan.github.com/blog/2012/04/22/octopress-highlight-phpinline/</loc>
+        <lastmod>2012-04-22T15:48:09+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://kusoayan.github.com/</loc>
-        <lastmod>2012-04-21T22:39:58+08:00</lastmod>
+        <lastmod>2012-04-22T15:48:09+08:00</lastmod>
     </url>
     <url>
         <loc>http://kusoayan.github.com/about-me/</loc>
@@ -44,6 +52,6 @@
     </url>
     <url>
         <loc>http://kusoayan.github.com/blog/archives/</loc>
-        <lastmod>2012-04-21T22:39:58+08:00</lastmod>
+        <lastmod>2012-04-22T15:48:09+08:00</lastmod>
     </url>
 </urlset>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | Lazy is good]]></title>
   <link href="http://kusoayan.github.com/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-21T22:40:07+08:00</updated>
+  <updated>2012-04-22T15:48:28+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -12,6 +12,225 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[octopress 幫 PHP 語句上色而不需要 php tag]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/04/22/octopress-highlight-phpinline/"/>
+    <updated>2012-04-22T14:53:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/04/22/octopress-highlight-phpinline</id>
+    <content type="html"><![CDATA[<p>在幫程式碼上色時可以使用 codeblock 來包住程式碼區塊，但是像要幫 PHP 上色時卻會有個麻煩，如果程式碼開頭沒有<code>&lt;?php</code>這個 tag 的話，就不會被上色了：</p>
+
+<!-- more -->
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>php without tag </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">echo &quot;Hello World!&quot;;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>php with tag  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">&amp;lt;?php</span>
+</span><span class='line'><span class="x">echo &quot;Hello World!&quot;;</span>
+</span><span class='line'><span class="x">?&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><a href="https://gist.github.com/2398211">參考解法</a>：
+修改 octopress 資料夾底下的 plugins/pygments_code.rb，在大約第 14 行的地方加入
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>plugins/pygments_code.rb  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">opts</span> <span class="o">=</span> <span class="p">{}</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;if lang == &#39;phpinline&#39;</span>
+</span><span class='line'><span class="sr">  lang = &#39;php&#39;</span>
+</span><span class='line'><span class="sr">  opts = {:startinline =&amp;gt; true}</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>之後使用 lang:phpinline 就可以省去 php tag 了！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[fuelphp 新增（修改）欄位]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/04/22/fuelphp-add-field/"/>
+    <updated>2012-04-22T10:58:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/04/22/fuelphp-add-field</id>
+    <content type="html"><![CDATA[<p>這次就來記一下 FuelPHP 的 migration。</p>
+
+<p>用 <code>oil generate</code> 建完一大堆 Model、DB Table 之後，如果想更改、新增欄位怎麼辦？</p>
+
+<!-- more -->
+
+
+<p>這時候就可以用 FuelPHP 強大的 migration 功能！</p>
+
+<p>首先先建立一個 migration 的檔案在 app/migrations 底下，開頭請照順序 001~999 這樣編號，不能跳號、也不能有重複的，舉個例子，</p>
+
+<p>這是 OK 的：</p>
+
+<ul>
+<li>migrations/
+
+<ul>
+<li>001_create_users.php</li>
+<li>002_create_items.php</li>
+</ul>
+</li>
+</ul>
+
+
+<p>這是不 OK 的：</p>
+
+<ul>
+<li>migrations/
+
+<ul>
+<li>001_create_users.php</li>
+<li>002_create_items.php</li>
+<li>002_create_books.php</li>
+<li>004_create_stores.php</li>
+</ul>
+</li>
+</ul>
+
+
+<p>接著，這個 migration 檔案的內容可以參考下列格式
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>006_example.php  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">namespace</span> <span class="nx">Fuel\Migrations</span><span class="p">;</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="k">class</span> <span class="nc">Example</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">public</span> <span class="k">function</span> <span class="nf">up</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="nx">\DBUtil</span><span class="o">::</span><span class="na">create_table</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;id&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">11</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;int&#39;</span><span class="p">,</span> <span class="s1">&#39;auto_increment&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">true</span><span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;username&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">50</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;varchar&#39;</span><span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;password&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">255</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;varchar&#39;</span><span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;group&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">11</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;int&#39;</span><span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;email&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">255</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;varchar&#39;</span><span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;last_login&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">11</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;int&#39;</span><span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;login_hash&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">255</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;varchar&#39;</span><span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;profile_fields&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;text&#39;</span><span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;created_at&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">11</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;int&#39;</span><span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;updated_at&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">11</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;int&#39;</span><span class="p">),</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">),</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">));</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">down</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="nx">\DBUtil</span><span class="o">::</span><span class="na">drop_table</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>首先注意到的是，會有兩個 method：up 還有 down，分別是讓 oil 可以知道怎麼執行或是反執行這個 migration，也就是說每個 migration 的動作都是可逆的！
+再來是新增欄位的方式，可以參考 FuelPHP 的 <a href="http://docs.fuelphp.com/classes/database/dbutil.html#/method_add_fields">DBUtil</a>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>add fiel  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">\DBUtil</span><span class="o">::</span><span class="na">add_fields</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="s1">&#39;surname&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;varchar&#39;</span><span class="p">),</span>
+</span><span class='line'><span class="s1">&#39;twitter_name&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;constraint&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s1">&#39;varchar&#39;</span><span class="p">),</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+別忘了在 down method 中加入反操作
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>drop fiel  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">\DBUtil</span><span class="o">::</span><span class="na">drop</span><span class="nx">\_fields</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="s1">&#39;surname&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>當 migration 的檔案建立好之後，就可以直接使用 oil 來幫你處理剩下的事情了！</p>
+
+<p><code>php oil refine migrate</code></p>
+
+<p>這個指令會讓 oil 自動 migrate 到最新的版本，當然你也可以自己指定版本或是其他操作：</p>
+
+<p><code>
+$ php oil refine migrate:current
+$ php oil refine migrate:up
+$ php oil refine migrate:down
+$ php oil refine migrate --version=10
+</code></p>
+
+<p>這樣 database 的 table 就都弄好了，接下來記得修改一下你的 model，通常需要加的是 validate 的部份，加上新的欄位的驗證方式！</p>
+
+<p>寫到這邊才發現其實 FuelPHP 的 <code>oil generate</code> 有更強大的功能…他可以幫你<a href="http://docs.fuelphp.com/packages/oil/generate.html#/migrations">產生 migrate 檔案</a> XD
+所以你就可以用這種更快速的方式來產生 migrations：</p>
+
+<p><code>
+$ php oil generate migration create_users name:text email:string[50] password:string[125]
+$ php oil generate migration rename_table_users_to_accounts
+$ php oil generate migration add_bio_to_accounts bio:text
+$ php oil generate migration rename_field_name_to_username_in_accounts
+$ php oil generate migration drop_accounts
+</code></p>
+
+<p>簡直是太爽了XD</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[用 fuelphp email 套件寄gmail]]></title>
@@ -203,23 +422,31 @@ $email-&gt;html_body(\View::forge('email/template', $email_data));
 <li>把它解壓縮</li>
 <li>把解壓縮後的資料夾移到你的 Server 上，結構大概如下：
 
-<blockquote><p>/</p>
+<ul>
+<li>/
 
-<p>fuel/</p>
+<ul>
+<li>fuel/
 
-<pre><code>app/
-core/
-packages/
-</code></pre>
+<ul>
+<li>app/</li>
+<li>core/</li>
+<li>packages/</li>
+</ul>
+</li>
+<li>public/
 
-<p>public/</p>
-
-<pre><code>.htaccess
-assets/
-index.php
-</code></pre>
-
-<p>oil</p></blockquote></li>
+<ul>
+<li>.htaccess</li>
+<li>assets/</li>
+<li>index.php</li>
+</ul>
+</li>
+<li>oil</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>設定資料夾的讀寫權限，可以手動或是執行底下的指令：
 <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -311,21 +538,6 @@ index.php
 
 
 <p>後面兩種是比較少用到，而且大多數瀏覽器也都不支援的！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[fuelphp - oil generate 出錯]]></title>
-    <link href="http://kusoayan.github.com/blog/2012/04/16/fuelphp-oil-generate-chu-cuo/"/>
-    <updated>2012-04-16T16:49:00+08:00</updated>
-    <id>http://kusoayan.github.com/blog/2012/04/16/fuelphp-oil-generate-chu-cuo</id>
-    <content type="html"><![CDATA[<p>今天要用 FuelPHP 的 oil 時出現了一點小錯誤，當我下指令</p>
-
-<pre><code>oil generate model users username:varchar[50] password:string group:int email:string last_login:int login_hash:string profile_fields:text
-</code></pre>
-
-<p>時卻出現 Error 說找不到 migrations 的資料夾，上 IRC 問了之後才知道問題是出在 php.ini 中的 <code>open_basedir</code>，因為我有設定 php.ini 中的這個變數，導致 oil 沒辦法正確 resolve 資料夾。
-在 IRC 上討論了半天最後解法是直接把 <code>open_basedir</code> 直接 comment 掉。</p>
 ]]></content>
   </entry>
   

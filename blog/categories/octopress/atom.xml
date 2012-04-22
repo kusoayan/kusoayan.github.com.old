@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Lazy is good]]></title>
   <link href="http://kusoayan.github.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-21T22:40:07+08:00</updated>
+  <updated>2012-04-22T15:48:28+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[octopress 幫 PHP 語句上色而不需要 php tag]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/04/22/octopress-highlight-phpinline/"/>
+    <updated>2012-04-22T14:53:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/04/22/octopress-highlight-phpinline</id>
+    <content type="html"><![CDATA[<p>在幫程式碼上色時可以使用 codeblock 來包住程式碼區塊，但是像要幫 PHP 上色時卻會有個麻煩，如果程式碼開頭沒有<code>&lt;?php</code>這個 tag 的話，就不會被上色了：</p>
+
+<!-- more -->
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>php without tag </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">echo &quot;Hello World!&quot;;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>php with tag  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">&amp;lt;?php</span>
+</span><span class='line'><span class="x">echo &quot;Hello World!&quot;;</span>
+</span><span class='line'><span class="x">?&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><a href="https://gist.github.com/2398211">參考解法</a>：
+修改 octopress 資料夾底下的 plugins/pygments_code.rb，在大約第 14 行的地方加入
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>plugins/pygments_code.rb  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">opts</span> <span class="o">=</span> <span class="p">{}</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;if lang == &#39;phpinline&#39;</span>
+</span><span class='line'><span class="sr">  lang = &#39;php&#39;</span>
+</span><span class='line'><span class="sr">  opts = {:startinline =&amp;gt; true}</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>之後使用 lang:phpinline 就可以省去 php tag 了！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rake 0.9.2.2 vs 0.9.2 error]]></title>

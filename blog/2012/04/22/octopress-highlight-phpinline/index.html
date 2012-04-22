@@ -1,0 +1,166 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>octopress 幫 PHP 語句上色而不需要 php tag - Lazy is good</title>
+    <meta name="author" content="Lazy Wei">
+
+    
+    <meta name="description" content="Octopress 幫 PHP 語句上色而不需要 Php Tag 在幫程式碼上色時可以使用 codeblock 來包住程式碼區塊，但是像要幫 PHP 上色時卻會有個麻煩，如果程式碼開頭沒有&lt;?php這個 tag 的話，就不會被上色了： php without tag 1
+echo & &hellip;">
+    
+    <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
+
+    <link href="false" rel="alternate" title="Lazy is good" type="application/atom+xml">
+    <link rel="canonical" href="">
+    <link href="/favicon.png" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+
+</head>
+
+<body>
+	<header class="inner"><h1 class="left"><a href="/">Lazy is good</a></h1>
+<nav class="menu left"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about-me">Resume</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<div class="right">
+	<form class="search right" action="http://google.com/search" method="get">
+		<input class="left" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:kusoayan.github.com">
+	</form>
+	<div class="social right">
+		
+		<a class="facebook" href="http://www.facebook.com/kusoayan" title="Facebook">Facebook</a>
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/jrweizhang" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/kusoayan" title="GitHub">GitHub</a>
+		
+		
+		
+	</div>
+</div>
+
+</header>
+	<div id="content" class="inner"><article class="post">
+    <h1 class="title">Octopress 幫 PHP 語句上色而不需要 Php Tag</h1>
+    <div class="entry"><p>在幫程式碼上色時可以使用 codeblock 來包住程式碼區塊，但是像要幫 PHP 上色時卻會有個麻煩，如果程式碼開頭沒有<code>&lt;?php</code>這個 tag 的話，就不會被上色了：</p>
+
+<!-- more -->
+
+
+
+
+<figure class='code'><figcaption><span>php without tag </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">echo &quot;Hello World!&quot;; </span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>php with tag  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="k">echo</span> <span class="s2">&quot;Hello World!&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://gist.github.com/2398211">參考解法</a>：
+修改 octopress 資料夾底下的 plugins/pygments_code.rb，在大約第 14 行的地方加入</p>
+
+<figure class='code'><figcaption><span>plugins/pygments_code.rb  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">opts</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">lang</span> <span class="o">==</span> <span class="s1">&#39;phpinline&#39;</span>
+</span><span class='line'>      <span class="n">lang</span> <span class="o">=</span> <span class="s1">&#39;php&#39;</span>
+</span><span class='line'>      <span class="n">opts</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:startinline</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>之後使用 lang:phpinline 就可以省去 php tag 了！</p>
+</div>
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-22T14:53:00+08:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2012</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/blog/categories/octopress/'>octopress</a>, <a class='category' href='/blog/categories/php/'>php</a>
+  
+</div>
+
+</div>
+        
+    </div>
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer class="inner">Copyright &copy; 2012 Lazy is good</footer>
+	<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'kusoayan';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://kusoayan.github.com/blog/2012/04/22/octopress-highlight-phpinline/';
+        var disqus_url = 'http://kusoayan.github.com/blog/2012/04/22/octopress-highlight-phpinline/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+</body>
+</html>
