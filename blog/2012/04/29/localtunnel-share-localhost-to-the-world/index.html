@@ -1,0 +1,158 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>localtunnel - 將你的 localhost 分享給其他人 - Lazy is good</title>
+    <meta name="author" content="Lazy Wei">
+
+    
+    <meta name="description" content="Localtunnel - 將你的 Localhost 分享給其他人 今天在研究 FuelPHP 和 FaceBook 的登入機制時，FB 要求我輸入 domain name，因為安全問題只會允許該 domain。 因為是在本機開發，所以一開始我填 127.0.0.1，結果他跟我說這是 &hellip;">
+    
+    <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
+
+    <link href="false" rel="alternate" title="Lazy is good" type="application/atom+xml">
+    <link rel="canonical" href="">
+    <link href="/favicon.png" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+
+</head>
+
+<body>
+	<header class="inner"><h1 class="left"><a href="/">Lazy is good</a></h1>
+<nav class="menu left"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about-me">Resume</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<div class="right">
+	<form class="search right" action="http://google.com/search" method="get">
+		<input class="left" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:kusoayan.github.com">
+	</form>
+	<div class="social right">
+		
+		<a class="facebook" href="http://www.facebook.com/kusoayan" title="Facebook">Facebook</a>
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/jrweizhang" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/kusoayan" title="GitHub">GitHub</a>
+		
+		
+		
+	</div>
+</div>
+
+</header>
+	<div id="content" class="inner"><article class="post">
+    <h1 class="title">Localtunnel - 將你的 Localhost 分享給其他人</h1>
+    <div class="entry"><p>今天在研究 FuelPHP 和 FaceBook 的登入機制時，FB 要求我輸入 domain name，因為安全問題只會允許該 domain。</p>
+
+<p>因為是在本機開發，所以一開始我填 127.0.0.1，結果他跟我說這是 invalid domain name…然後我又填了 localhost，照樣XD
+這時候其實有一種解法是直接去改 /etc/hosts…但是太麻煩了！</p>
+
+<!-- more -->
+
+
+<p>所以今天來介紹一下 <a href="http://progrium.com/localtunnel/">localtunnel</a> 這個非常酷的東西！
+安裝很簡單，就透過 gem 裝起來就可以了：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gem install localtunnel</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然後第一次用的時候要先新增你的 public key：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ localtunnel -k ~/.ssh/id\_rsa.pub 80</span></code></pre></td></tr></table></div></figure>
+
+
+<p>-k 表示新增一個 key，接著是放 RSA public key 的位置，最後一個參數表示你要開放的 port。</p>
+
+<p>接著你會看到類似這樣的文字：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>This localtunnel service is brought to you by Twilio.
+</span><span class='line'>Port 80 is now publicly accessible from http://4vff.localtunnel.com ...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>這樣只要透過那個網址就能連到 localhost:80 了！
+Easy! Cool!
+而之後用的話就只要<code>localtunnel 80</code>就可以了！</p>
+</div>
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-29T13:58:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/blog/categories/web/'>web</a>
+  
+</div>
+
+</div>
+        
+    </div>
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer class="inner">Copyright &copy; 2012 Lazy is good</footer>
+	<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'kusoayan';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://kusoayan.github.com/blog/2012/04/29/localtunnel-share-localhost-to-the-world/';
+        var disqus_url = 'http://kusoayan.github.com/blog/2012/04/29/localtunnel-share-localhost-to-the-world/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+</body>
+</html>

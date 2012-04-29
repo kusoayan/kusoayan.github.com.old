@@ -4,7 +4,7 @@
   <title><![CDATA[Lazy is good]]></title>
   <link href="http://kusoayan.github.com/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-22T15:48:28+08:00</updated>
+  <updated>2012-04-30T00:04:54+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -12,6 +12,155 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[localtunnel - 將你的 localhost 分享給其他人]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/04/29/localtunnel-share-localhost-to-the-world/"/>
+    <updated>2012-04-29T13:58:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/04/29/localtunnel-share-localhost-to-the-world</id>
+    <content type="html"><![CDATA[<p>今天在研究 FuelPHP 和 FaceBook 的登入機制時，FB 要求我輸入 domain name，因為安全問題只會允許該 domain。</p>
+
+<p>因為是在本機開發，所以一開始我填 127.0.0.1，結果他跟我說這是 invalid domain name…然後我又填了 localhost，照樣XD
+這時候其實有一種解法是直接去改 /etc/hosts…但是太麻煩了！</p>
+
+<!-- more -->
+
+
+<p>所以今天來介紹一下 <a href="http://progrium.com/localtunnel/">localtunnel</a> 這個非常酷的東西！
+安裝很簡單，就透過 gem 裝起來就可以了：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gem install localtunnel</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然後第一次用的時候要先新增你的 public key：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ localtunnel -k ~/.ssh/id\_rsa.pub 80</span></code></pre></td></tr></table></div></figure>
+
+
+<p>-k 表示新增一個 key，接著是放 RSA public key 的位置，最後一個參數表示你要開放的 port。</p>
+
+<p>接著你會看到類似這樣的文字：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>This localtunnel service is brought to you by Twilio.
+</span><span class='line'>Port 80 is now publicly accessible from http://4vff.localtunnel.com ...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>這樣只要透過那個網址就能連到 localhost:80 了！
+Easy! Cool!
+而之後用的話就只要<code>localtunnel 80</code>就可以了！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[在 archlinux 上安裝 grub2]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/04/28/reinstall-grub2-on-archlinux/"/>
+    <updated>2012-04-28T11:10:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/04/28/reinstall-grub2-on-archlinux</id>
+    <content type="html"><![CDATA[<p>因為每次升級 <a href="http://www.ubuntu.com/">ubuntu</a> 的時候他都會把我的 grub2 選單蓋掉…所以只好重新在 archlinux 上裝過了</p>
+
+<!-- more -->
+
+
+<p>首先，用 pacman 或 yaourt 安裝 grub2</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo pacman -S grub2-bios</span></code></pre></td></tr></table></div></figure>
+
+
+<p>因為 grub2 和 grub 是衝突的，所以他會問你要不要刪除 grub，按下 Enter 移除</p>
+
+<p>接著是配置 grub2 到 MBR 中</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo grub-install --boot-directory=/boot --no-floppy --recheck --debug /dev/sda</span></code></pre></td></tr></table></div></figure>
+
+
+<p>因為我只有一顆硬碟，所以最後面是 sda，多顆硬碟的我就不清楚了@@</p>
+
+<p>然後 archwiki 上有提示說</p>
+
+<blockquote><p>For grub2 >= 1.99 (including bzr trunk)
+sudo modprobe dm-mod</p></blockquote>
+
+<p>所以如果出現錯誤的話可以執行一下上面指令</p>
+
+<p>然後產生 grub 的設定</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo GRUB\_PREFIX="/boot/grub" grub-mkconfig -o /boot/grub/grub.cfg</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果這一步沒掃到其他 OS 的話，可以先安裝 os-probe 來協助掃描其他作業系統</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo yaourt -S os-prober</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[解決 php_network_getaddresses: getaddrinfo failed]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/04/27/php-network-getaddresses-getaddrinfo-failed/"/>
+    <updated>2012-04-27T23:22:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/04/27/php-network-getaddresses-getaddrinfo-failed</id>
+    <content type="html"><![CDATA[<p>今天在用 fuelphp 寄 gmail 的時候跳出了這個該死的錯誤
+<code>php_network_getaddresses: getaddrinfo failed</code></p>
+
+<p>google 之後還是找不到好解法，無耐之下只好用 dirty and quick 的方式來解決，
+先 <code>ping smtp.gmail.com</code>，然後把取得的 ip 填到 /etc/hosts 底下…</p>
+
+<p>就先這樣吧…看能不能再找到更好的解法。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[在 archlinux 上安裝 node.js]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/04/27/install-node-dot-js-on-archlinux/"/>
+    <updated>2012-04-27T17:48:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/04/27/install-node-dot-js-on-archlinux</id>
+    <content type="html"><![CDATA[<p>因為工作需要，要接觸點 node.js，這邊就記一下怎麼在 archlinux 上安裝 node.js。</p>
+
+<!-- more -->
+
+
+<p>其實非常簡單，因為 <a href="http://aur.archlinux.org/">AUR</a> 中就有 node.js 了，所以只要下指令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo yaourt -S nodejs</span></code></pre></td></tr></table></div></figure>
+
+
+<p>就可以了，因為我是用 yaourt 去抓 AUR 中的東西，如果你用的套件不同，可以照自己需求更改。</p>
+
+<p>接著測試一下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ mkdir nodejs
+</span><span class='line'>$ cd nodejs
+</span><span class='line'>$ echo "console.log(\"Hello World\");" > helloworld.js
+</span><span class='line'>$ node helloworld.js</span></code></pre></td></tr></table></div></figure>
+
+
+<p>這樣應個就可以看到 Hello World 的字樣了！更多關於 node.js 的教學可以參考<a href="http://www.nodebeginner.org/index-zh-tw.html">Node入門</a>。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[octopress custom start line in codeblock]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/04/22/octopress-custom-start-line-in-codeblock/"/>
+    <updated>2012-04-22T15:49:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/04/22/octopress-custom-start-line-in-codeblock</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[octopress 幫 PHP 語句上色而不需要 php tag]]></title>

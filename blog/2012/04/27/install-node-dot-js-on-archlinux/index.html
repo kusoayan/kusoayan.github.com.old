@@ -1,0 +1,151 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>在 archlinux 上安裝 node.js - Lazy is good</title>
+    <meta name="author" content="Lazy Wei">
+
+    
+    <meta name="description" content="在 Archlinux 上安裝 node.js 因為工作需要，要接觸點 node.js，這邊就記一下怎麼在 archlinux 上安裝 node.js。 其實非常簡單，因為 AUR 中就有 node.js 了，所以只要下指令： 1
+$ sudo yaourt -S nodejs 就可以了， &hellip;">
+    
+    <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
+
+    <link href="false" rel="alternate" title="Lazy is good" type="application/atom+xml">
+    <link rel="canonical" href="">
+    <link href="/favicon.png" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+
+</head>
+
+<body>
+	<header class="inner"><h1 class="left"><a href="/">Lazy is good</a></h1>
+<nav class="menu left"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about-me">Resume</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<div class="right">
+	<form class="search right" action="http://google.com/search" method="get">
+		<input class="left" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:kusoayan.github.com">
+	</form>
+	<div class="social right">
+		
+		<a class="facebook" href="http://www.facebook.com/kusoayan" title="Facebook">Facebook</a>
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/jrweizhang" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/kusoayan" title="GitHub">GitHub</a>
+		
+		
+		
+	</div>
+</div>
+
+</header>
+	<div id="content" class="inner"><article class="post">
+    <h1 class="title">在 Archlinux 上安裝 node.js</h1>
+    <div class="entry"><p>因為工作需要，要接觸點 node.js，這邊就記一下怎麼在 archlinux 上安裝 node.js。</p>
+
+<!-- more -->
+
+
+<p>其實非常簡單，因為 <a href="http://aur.archlinux.org/">AUR</a> 中就有 node.js 了，所以只要下指令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo yaourt -S nodejs</span></code></pre></td></tr></table></div></figure>
+
+
+<p>就可以了，因為我是用 yaourt 去抓 AUR 中的東西，如果你用的套件不同，可以照自己需求更改。</p>
+
+<p>接著測試一下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ mkdir nodejs
+</span><span class='line'>$ cd nodejs
+</span><span class='line'>$ echo "console.log(\"Hello World\");" > helloworld.js
+</span><span class='line'>$ node helloworld.js</span></code></pre></td></tr></table></div></figure>
+
+
+<p>這樣應個就可以看到 Hello World 的字樣了！更多關於 node.js 的教學可以參考<a href="http://www.nodebeginner.org/index-zh-tw.html">Node入門</a>。</p>
+</div>
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-27T17:48:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/blog/categories/javascript/'>javascript</a>, <a class='category' href='/blog/categories/node-js/'>node.js</a>, <a class='category' href='/blog/categories/web/'>web</a>
+  
+</div>
+
+</div>
+        
+    </div>
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer class="inner">Copyright &copy; 2012 Lazy is good</footer>
+	<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'kusoayan';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://kusoayan.github.com/blog/2012/04/27/install-node-dot-js-on-archlinux/';
+        var disqus_url = 'http://kusoayan.github.com/blog/2012/04/27/install-node-dot-js-on-archlinux/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+</body>
+</html>

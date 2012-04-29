@@ -4,7 +4,7 @@
   <title><![CDATA[Category: archlinux | Lazy is good]]></title>
   <link href="http://kusoayan.github.com/blog/categories/archlinux/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-22T15:48:28+08:00</updated>
+  <updated>2012-04-30T00:04:54+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -12,6 +12,47 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[在 archlinux 上安裝 grub2]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/04/28/reinstall-grub2-on-archlinux/"/>
+    <updated>2012-04-28T11:10:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/04/28/reinstall-grub2-on-archlinux</id>
+    <content type="html"><![CDATA[<p>因為每次升級 <a href="http://www.ubuntu.com/">ubuntu</a> 的時候他都會把我的 grub2 選單蓋掉…所以只好重新在 archlinux 上裝過了</p>
+
+<!-- more -->
+
+
+<p>首先，用 pacman 或 yaourt 安裝 grub2</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo pacman -S grub2-bios</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>因為 grub2 和 grub 是衝突的，所以他會問你要不要刪除 grub，按下 Enter 移除</p>
+
+<p>接著是配置 grub2 到 MBR 中</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo grub-install --boot-directory=/boot --no-floppy --recheck --debug /dev/sda</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>因為我只有一顆硬碟，所以最後面是 sda，多顆硬碟的我就不清楚了@@</p>
+
+<p>然後 archwiki 上有提示說</p>
+
+<blockquote><p>For grub2 >= 1.99 (including bzr trunk)
+sudo modprobe dm-mod</p></blockquote>
+
+<p>所以如果出現錯誤的話可以執行一下上面指令</p>
+
+<p>然後產生 grub 的設定
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo GRUB_PREFIX="/boot/grub" grub-mkconfig -o /boot/grub/grub.cfg</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>如果這一步沒掃到其他 OS 的話，可以先安裝 os-probe 來協助掃描其他作業系統
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo yaourt -S os-prober</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[解決 archlinux 下 gem 不在系統路徑(PATH)的問題]]></title>

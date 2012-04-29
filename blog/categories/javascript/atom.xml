@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: javascript | Lazy is good]]></title>
+  <link href="http://kusoayan.github.com/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://kusoayan.github.com/"/>
+  <updated>2012-04-30T00:04:54+08:00</updated>
+  <id>http://kusoayan.github.com/</id>
+  <author>
+    <name><![CDATA[Lazy Wei]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[在 archlinux 上安裝 node.js]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/04/27/install-node-dot-js-on-archlinux/"/>
+    <updated>2012-04-27T17:48:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/04/27/install-node-dot-js-on-archlinux</id>
+    <content type="html"><![CDATA[<p>因為工作需要，要接觸點 node.js，這邊就記一下怎麼在 archlinux 上安裝 node.js。</p>
+
+<!-- more -->
+
+
+<p>其實非常簡單，因為 <a href="http://aur.archlinux.org/">AUR</a> 中就有 node.js 了，所以只要下指令：
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo yaourt -S nodejs</span></code></pre></td></tr></table></div></figure></notextile></div>
+就可以了，因為我是用 yaourt 去抓 AUR 中的東西，如果你用的套件不同，可以照自己需求更改。</p>
+
+<p>接著測試一下：
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ mkdir nodejs
+</span><span class='line'>$ cd nodejs
+</span><span class='line'>$ echo "console.log(\"Hello World\");" > helloworld.js
+</span><span class='line'>$ node helloworld.js</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>這樣應個就可以看到 Hello World 的字樣了！更多關於 node.js 的教學可以參考<a href="http://www.nodebeginner.org/index-zh-tw.html">Node入門</a>。</p>
+]]></content>
+  </entry>
+  
+</feed>
