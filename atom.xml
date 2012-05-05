@@ -4,7 +4,7 @@
   <title><![CDATA[Lazy is good]]></title>
   <link href="http://kusoayan.github.com/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-05-05T13:56:24+08:00</updated>
+  <updated>2012-05-05T14:01:57+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -32,10 +32,7 @@
 <p>但這裡的問題會是，要怎麼確認去要 access token 的是我們的 web app 而不是別人？
 所以 Google 需要一個加密過的 JSON Web Tokens（JWT），驗證身份的詳細流程可以參考 <a href="http://goo.gl/RyqTd">http://goo.gl/RyqTd</a></p>
 
-<p>這邊就稍微分享一下 Service Account 的用法，</p>
-
-<p>整個 JWT 的產生、簽章都可以在 Google 的 <a href="http://goo.gl/qUZEL">Doc</a> 中找到
-但是 Doc 上也說了，非常不建議 developer 自己實作這個流程，而是建議你使用 <a href="http://goo.gl/MZ4yg">Google APIs Client Library for PHP</a></p>
+<p>這邊就稍微分享一下 Service Account 的用法，整個 JWT 的產生、簽章都可以在 Google 的 <a href="http://goo.gl/qUZEL">Doc</a> 中找到，但是 Doc 上也說了，非常不建議 developer 自己實作這個流程，而是建議你使用 <a href="http://goo.gl/MZ4yg">Google APIs Client Library for PHP</a></p>
 
 <p>透過這個 Client Library，取得 access token 的整個過程會變得非常簡單，程式碼部份如下：</p>
 
@@ -107,14 +104,14 @@
 
 <p>一開始的幾個 constant:</p>
 
-<p>CLIENT_ID 和 SERVICE_ACCOUNT_NAME
+<p><code>CLIENT_ID</code> 和 <code>SERVICE_ACCOUNT_NAME</code>
 分別是 Google Api Console 上面顯示的 Client ID 和 Email address</p>
 
-<p>KEY_FILE 則是當初申請 Google API Console 時他給的 Private key 的檔案位置（你要自己把他下載回來）</p>
+<p><code>KEY_FILE</code> 則是當初申請 Google API Console 時他給的 Private key 的檔案位置（你要自己把他下載回來）</p>
 
-<p>接著就可以使用 apiAssertionCredentials 這個物件的 generateAssertion method 來產生 assertion</p>
+<p>接著就可以使用 <code>apiAssertionCredentials</code> 這個物件的 <code>generateAssertion</code> method 來產生 assertion</p>
 
-<p>下面的 curl 是我自己把資料 post 到 google 測試用的，最後拿到的 access token 就可以用來操作相關的 API 了！</p>
+<p>最後面的 curl 是我自己把資料 post 到 google 測試用的，最後拿到的 access token 就可以用來操作相關的 API 了！</p>
 ]]></content>
   </entry>
   
