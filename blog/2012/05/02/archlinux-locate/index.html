@@ -3,11 +3,13 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>localtunnel - 將你的 localhost 分享給其他人 - Lazy is good</title>
+    <title>archlinux 的 locate - Lazy is good</title>
     <meta name="author" content="Lazy Wei">
 
     
-    <meta name="description" content="Localtunnel - 將你的 Localhost 分享給其他人 今天在研究 FuelPHP 和 FaceBook 的登入機制時，FB 要求我輸入 domain name，因為安全問題只會允許該 domain。 因為是在本機開發，所以一開始我填 127.0.0.1，結果他跟我說這是 &hellip;">
+    <meta name="description" content="Archlinux 的 Locate 要用到 locate 這個指令時卻出現 command not found…
+所以找了一下，原來是要自己安裝阿 1
+$ sudo yaourt -S mlocate 接著他應該會出現這樣的訊息 mlocate command is technically &hellip;">
     
     <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
 
@@ -53,41 +55,25 @@
 
 </header>
 	<div id="content" class="inner"><article class="post">
-    <h1 class="title">Localtunnel - 將你的 Localhost 分享給其他人</h1>
-    <div class="entry"><p>今天在研究 FuelPHP 和 FaceBook 的登入機制時，FB 要求我輸入 domain name，因為安全問題只會允許該 domain。</p>
-
-<p>因為是在本機開發，所以一開始我填 127.0.0.1，結果他跟我說這是 invalid domain name…然後我又填了 localhost，照樣XD
-這時候其實有一種解法是直接去改 /etc/hosts…但是太麻煩了！</p>
-
-<!-- more -->
-
-
-<p>所以今天來介紹一下 <a href="http://progrium.com/localtunnel/">localtunnel</a> 這個非常酷的東西！
-安裝很簡單，就透過 gem 裝起來就可以了：</p>
+    <h1 class="title">Archlinux 的 Locate</h1>
+    <div class="entry"><p>要用到 locate 這個指令時卻出現 command not found…
+所以找了一下，原來是要自己安裝阿</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ gem install localtunnel</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo yaourt -S mlocate</span></code></pre></td></tr></table></div></figure>
 
 
-<p>然後第一次用的時候要先新增你的 public key：</p>
+<p>接著他應該會出現這樣的訊息</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ localtunnel -k ~/.ssh/id\_rsa.pub 80</span></code></pre></td></tr></table></div></figure>
-
-
-<p>k 表示新增一個 key，接著是放 RSA public key 的位置，最後一個參數表示你要開放的 port。</p>
-
-<p>接著你會看到類似這樣的文字：</p>
+<blockquote><p>mlocate command is technically locate, but slocate is symlinked and still works.
+You should run updatedb as root.
+所以下指令</p></blockquote>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>This localtunnel service is brought to you by Twilio.
-</span><span class='line'>Port 80 is now publicly accessible from http://4vff.localtunnel.com ...</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo updatedb</span></code></pre></td></tr></table></div></figure>
 
 
-<p>這樣只要透過那個網址就能連到 localhost:80 了！
-Easy and Cool!
-而之後用的話就只要 <code>localtunnel 80</code> ！</p>
+<p>然後就等他跑完吧！</p>
 </div>
     <div class="meta">
         <div class="date">
@@ -102,12 +88,12 @@ Easy and Cool!
   
 
 
-<time datetime="2012-04-29T13:58:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2012</time></div>
+<time datetime="2012-05-02T00:40:00+08:00" pubdate data-updated="true">May 2<span>nd</span>, 2012</time></div>
         <div class="tags">
 
 <div class="cat">
   
-    <a class='category' href='/blog/categories/web/'>web</a>
+    <a class='category' href='/blog/categories/archlinux/'>archlinux</a>
   
 </div>
 
@@ -141,8 +127,8 @@ Easy and Cool!
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://kusoayan.github.com/blog/2012/04/29/localtunnel-share-localhost-to-the-world/';
-        var disqus_url = 'http://kusoayan.github.com/blog/2012/04/29/localtunnel-share-localhost-to-the-world/';
+        var disqus_identifier = 'http://kusoayan.github.com/blog/2012/05/02/archlinux-locate/';
+        var disqus_url = 'http://kusoayan.github.com/blog/2012/05/02/archlinux-locate/';
         var disqus_script = 'embed.js';
       
     (function () {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: web | Lazy is good]]></title>
-  <link href="http://kusoayan.github.com/blog/categories/web/atom.xml" rel="self"/>
+  <title><![CDATA[Category: google api | Lazy is good]]></title>
+  <link href="http://kusoayan.github.com/blog/categories/google-api/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
   <updated>2012-05-05T13:56:24+08:00</updated>
   <id>http://kusoayan.github.com/</id>
@@ -119,69 +119,6 @@
 <p>接著就可以使用 apiAssertionCredentials 這個物件的 generateAssertion method 來產生 assertion</p>
 
 <p>下面的 curl 是我自己把資料 post 到 google 測試用的，最後拿到的 access token 就可以用來操作相關的 API 了！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[localtunnel - 將你的 localhost 分享給其他人]]></title>
-    <link href="http://kusoayan.github.com/blog/2012/04/29/localtunnel-share-localhost-to-the-world/"/>
-    <updated>2012-04-29T13:58:00+08:00</updated>
-    <id>http://kusoayan.github.com/blog/2012/04/29/localtunnel-share-localhost-to-the-world</id>
-    <content type="html"><![CDATA[<p>今天在研究 FuelPHP 和 FaceBook 的登入機制時，FB 要求我輸入 domain name，因為安全問題只會允許該 domain。</p>
-
-<p>因為是在本機開發，所以一開始我填 127.0.0.1，結果他跟我說這是 invalid domain name…然後我又填了 localhost，照樣XD
-這時候其實有一種解法是直接去改 /etc/hosts…但是太麻煩了！</p>
-
-<!-- more -->
-
-
-<p>所以今天來介紹一下 <a href="http://progrium.com/localtunnel/">localtunnel</a> 這個非常酷的東西！
-安裝很簡單，就透過 gem 裝起來就可以了：
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ gem install localtunnel</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>然後第一次用的時候要先新增你的 public key：
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ localtunnel -k ~/.ssh/id_rsa.pub 80</span></code></pre></td></tr></table></div></figure></notextile></div>
-k 表示新增一個 key，接著是放 RSA public key 的位置，最後一個參數表示你要開放的 port。</p>
-
-<p>接著你會看到類似這樣的文字：
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>This localtunnel service is brought to you by Twilio.
-</span><span class='line'>Port 80 is now publicly accessible from http://4vff.localtunnel.com ...</span></code></pre></td></tr></table></div></figure></notextile></div>
-這樣只要透過那個網址就能連到 localhost:80 了！
-Easy and Cool!
-而之後用的話就只要 <code>localtunnel 80</code> ！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[在 archlinux 上安裝 node.js]]></title>
-    <link href="http://kusoayan.github.com/blog/2012/04/27/install-node-dot-js-on-archlinux/"/>
-    <updated>2012-04-27T17:48:00+08:00</updated>
-    <id>http://kusoayan.github.com/blog/2012/04/27/install-node-dot-js-on-archlinux</id>
-    <content type="html"><![CDATA[<p>因為工作需要，要接觸點 node.js，這邊就記一下怎麼在 archlinux 上安裝 node.js。</p>
-
-<!-- more -->
-
-
-<p>其實非常簡單，因為 <a href="http://aur.archlinux.org/">AUR</a> 中就有 node.js 了，所以只要下指令：
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo yaourt -S nodejs</span></code></pre></td></tr></table></div></figure></notextile></div>
-就可以了，因為我是用 yaourt 去抓 AUR 中的東西，如果你用的套件不同，可以照自己需求更改。</p>
-
-<p>接著測試一下：
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ mkdir nodejs
-</span><span class='line'>$ cd nodejs
-</span><span class='line'>$ echo "console.log(\"Hello World\");" > helloworld.js
-</span><span class='line'>$ node helloworld.js</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>這樣應個就可以看到 Hello World 的字樣了！更多關於 node.js 的教學可以參考<a href="http://www.nodebeginner.org/index-zh-tw.html">Node入門</a>。</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Lazy is good]]></title>
   <link href="http://kusoayan.github.com/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-30T00:04:54+08:00</updated>
+  <updated>2012-05-05T13:56:24+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -12,6 +12,137 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Google API and Service Account]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/05/05/google-api-and-service-account/"/>
+    <updated>2012-05-05T13:49:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/05/05/google-api-and-service-account</id>
+    <content type="html"><![CDATA[<p>最近在研究怎麼在 OAuth2 的機制下去驗證 hard coded 的身份，大致上來說就是我希望能讓自己的 Web Application 通過驗證，而不是 User，這樣 user 就能透過我的 Web App 去做一些相關操作。</p>
+
+<!-- more -->
+
+
+<p>後來翻 Google API 的 Documents 時意外發現，原來 Google 有提供一個 Service Account 的服務，這個服務正好就是我想要的，首先到 <a href="https://code.google.com/apis/console">https://code.google.com/apis/console</a> 這裡去註冊你的 application，註冊時身份要選擇 Service Account。</p>
+
+<p>一般來說，是由 web app 產生一個 url，讓 user 透過這個 url 到授權頁面，user 授權後會再度被導回 web app，並且附帶一個 access token。</p>
+
+<p>而 Service Account 則是讓上述 user 所做的事情改成我們的 web app 去做，也就是由 web app 去要 access token 回來。</p>
+
+<p>但這裡的問題會是，要怎麼確認去要 access token 的是我們的 web app 而不是別人？
+所以 Google 需要一個加密過的 JSON Web Tokens（JWT），驗證身份的詳細流程可以參考 <a href="http://goo.gl/RyqTd">http://goo.gl/RyqTd</a></p>
+
+<p>這邊就稍微分享一下 Service Account 的用法，</p>
+
+<p>整個 JWT 的產生、簽章都可以在 Google 的 <a href="http://goo.gl/qUZEL">Doc</a> 中找到
+但是 Doc 上也說了，非常不建議 developer 自己實作這個流程，而是建議你使用 <a href="http://goo.gl/MZ4yg">Google APIs Client Library for PHP</a></p>
+
+<p>透過這個 Client Library，取得 access token 的整個過程會變得非常簡單，程式碼部份如下：</p>
+
+<figure class='code'><figcaption><span>google-api-service-account  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">require_once</span> <span class="s1">&#39;./src/apiClient.php&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">const</span> <span class="no">CLIENT_ID</span> <span class="o">=</span> <span class="s1">&#39;123456789.apps.googleusercontent.com&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">const</span> <span class="no">SERVICE_ACCOUNT_NAME</span> <span class="o">=</span> <span class="s1">&#39;123456789@developer.gserviceaccount.com&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">const</span> <span class="no">KEY_FILE</span> <span class="o">=</span> <span class="s1">&#39;./some/where/to/your/privatekey.p12&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$key</span> <span class="o">=</span> <span class="nb">file_get_contents</span><span class="p">(</span><span class="nx">KEY_FILE</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$a</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">apiAssertionCredentials</span><span class="p">(</span>
+</span><span class='line'>  <span class="nx">SERVICE_ACCOUNT_NAME</span><span class="p">,</span>
+</span><span class='line'>  <span class="k">array</span><span class="p">(</span><span class="s1">&#39;https://gdata.youtube.com&#39;</span><span class="p">),</span>
+</span><span class='line'>  <span class="nv">$key</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$url</span> <span class="o">=</span> <span class="s2">&quot;https://accounts.google.com/o/oauth2/token&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="s1">&#39;grant_type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;assertion&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;assertion_type&#39;</span> <span class="o">=&gt;</span> <span class="s2">&quot;http://oauth.net/grant_type/jwt/1.0/bearer&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;assertion&#39;</span> <span class="o">=&gt;</span> <span class="nv">$a</span><span class="o">-&gt;</span><span class="na">generateAssertion</span><span class="p">(),</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'><span class="nb">print_r</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ch</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+</span><span class='line'><span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+</span><span class='line'><span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_POST</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'><span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'><span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_POSTFIELDS</span><span class="p">,</span> <span class="nb">http_build_query</span><span class="p">(</span><span class="nv">$data</span><span class="p">));</span>
+</span><span class='line'><span class="nv">$result</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$ch</span><span class="p">);</span>
+</span><span class='line'><span class="nb">curl_close</span><span class="p">(</span><span class="nv">$ch</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$result</span> <span class="o">=</span> <span class="nx">json_decode</span><span class="p">(</span><span class="nv">$result</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+</span><span class='line'><span class="nb">var_dump</span><span class="p">(</span><span class="nv">$result</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>一開始的幾個 constant:</p>
+
+<p>CLIENT_ID 和 SERVICE_ACCOUNT_NAME
+分別是 Google Api Console 上面顯示的 Client ID 和 Email address</p>
+
+<p>KEY_FILE 則是當初申請 Google API Console 時他給的 Private key 的檔案位置（你要自己把他下載回來）</p>
+
+<p>接著就可以使用 apiAssertionCredentials 這個物件的 generateAssertion method 來產生 assertion</p>
+
+<p>下面的 curl 是我自己把資料 post 到 google 測試用的，最後拿到的 access token 就可以用來操作相關的 API 了！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[archlinux 的 locate]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/05/02/archlinux-locate/"/>
+    <updated>2012-05-02T00:40:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/05/02/archlinux-locate</id>
+    <content type="html"><![CDATA[<p>要用到 locate 這個指令時卻出現 command not found…
+所以找了一下，原來是要自己安裝阿</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo yaourt -S mlocate</span></code></pre></td></tr></table></div></figure>
+
+
+<p>接著他應該會出現這樣的訊息</p>
+
+<blockquote><p>mlocate command is technically locate, but slocate is symlinked and still works.
+You should run updatedb as root.
+所以下指令</p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo updatedb</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然後就等他跑完吧！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[localtunnel - 將你的 localhost 分享給其他人]]></title>
@@ -39,7 +170,7 @@
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ localtunnel -k ~/.ssh/id\_rsa.pub 80</span></code></pre></td></tr></table></div></figure>
 
 
-<p>-k 表示新增一個 key，接著是放 RSA public key 的位置，最後一個參數表示你要開放的 port。</p>
+<p>k 表示新增一個 key，接著是放 RSA public key 的位置，最後一個參數表示你要開放的 port。</p>
 
 <p>接著你會看到類似這樣的文字：</p>
 
@@ -50,8 +181,8 @@
 
 
 <p>這樣只要透過那個網址就能連到 localhost:80 了！
-Easy! Cool!
-而之後用的話就只要<code>localtunnel 80</code>就可以了！</p>
+Easy and Cool!
+而之後用的話就只要 <code>localtunnel 80</code> ！</p>
 ]]></content>
   </entry>
   

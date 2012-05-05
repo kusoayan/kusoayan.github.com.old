@@ -4,7 +4,7 @@
   <title><![CDATA[Category: archlinux | Lazy is good]]></title>
   <link href="http://kusoayan.github.com/blog/categories/archlinux/atom.xml" rel="self"/>
   <link href="http://kusoayan.github.com/"/>
-  <updated>2012-04-30T00:04:54+08:00</updated>
+  <updated>2012-05-05T13:56:24+08:00</updated>
   <id>http://kusoayan.github.com/</id>
   <author>
     <name><![CDATA[Lazy Wei]]></name>
@@ -12,6 +12,26 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[archlinux 的 locate]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/05/02/archlinux-locate/"/>
+    <updated>2012-05-02T00:40:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/05/02/archlinux-locate</id>
+    <content type="html"><![CDATA[<p>要用到 locate 這個指令時卻出現 command not found…
+所以找了一下，原來是要自己安裝阿
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo yaourt -S mlocate</span></code></pre></td></tr></table></div></figure></notextile></div>
+接著他應該會出現這樣的訊息</p>
+
+<blockquote><p>mlocate command is technically locate, but slocate is symlinked and still works.
+You should run updatedb as root.
+所以下指令
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo updatedb</span></code></pre></td></tr></table></div></figure></notextile></div>
+然後就等他跑完吧！</p></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[在 archlinux 上安裝 grub2]]></title>
