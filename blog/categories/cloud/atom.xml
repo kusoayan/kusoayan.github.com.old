@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: cloud | Lazy is good]]></title>
+  <link href="http://kusoayan.github.com/blog/categories/cloud/atom.xml" rel="self"/>
+  <link href="http://kusoayan.github.com/"/>
+  <updated>2012-06-01T23:26:47+08:00</updated>
+  <id>http://kusoayan.github.com/</id>
+  <author>
+    <name><![CDATA[Lazy Wei]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[佈署 FuelPHP 到 PagodaBox: PHP 的 Heroku]]></title>
+    <link href="http://kusoayan.github.com/blog/2012/05/19/fuelphp-pagodabox-php-cloud/"/>
+    <updated>2012-05-19T16:55:00+08:00</updated>
+    <id>http://kusoayan.github.com/blog/2012/05/19/fuelphp-pagodabox-php-cloud</id>
+    <content type="html"><![CDATA[<p>有寫 Ruby 的人一定知道 <a href="http://www.heroku.com/">Heroku</a>，簡直就是 ROR 的天堂吧…雖然說 Heroku 也可以 deploy PHP，但是總是有種依附在 Rubyer 底下的感覺（？）XD</p>
+
+<p>所以今天就來介紹一下 <a href="http://pagodabox.com/">PagodaBox</a>，以及怎麼 deploy FuelPHP on it！</p>
+
+<!-- more -->
+
+
+<p>PagodaBox 和 Heroku 一樣是屬於 PaaS(Platform as a Service) 平台，</p>
+]]></content>
+  </entry>
+  
+</feed>

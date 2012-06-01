@@ -3,11 +3,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Category: archlinux - Lazy is good</title>
+    <title>清理 Arch Linux 的 Package - Lazy is good</title>
     <meta name="author" content="Lazy Wei">
 
     
-    <meta name="description" content="Category: archlinux">
+    <meta name="description" content="清理 Arch Linux 的 Package Arch 的 Pacman 很好用，可以自動幫你解套件相依的問題，但是用久了就容易出現這種狀況：可能某個套件是當初安裝別的套件時為了解決相依問題而被安裝上去，但之後卻不再被需要，也就是說這個套件成了孤兒，耗在你的系統中佔空間。 好險 Pacman &hellip;">
     
     <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
 
@@ -52,19 +52,33 @@
 </div>
 
 </header>
-	<div id="content" class="inner">
-<section class="archive">
-	
-	
-		
-		<h1 class="archive-title">2012</h1>
-	
-	<article class="archive">
-		
-<h1 class="title"><a href="/blog/2012/06/01/archlinux-clean-orphan-package/">清理 Arch Linux 的 Package</a></h1>
-<div class="meta">
-	<span class="date">Jun  1</span>
-	<span class="tags">
+	<div id="content" class="inner"><article class="post">
+    <h1 class="title">清理 Arch Linux 的 Package</h1>
+    <div class="entry"><p>Arch 的 Pacman 很好用，可以自動幫你解套件相依的問題，但是用久了就容易出現這種狀況：可能某個套件是當初安裝別的套件時為了解決相依問題而被安裝上去，但之後卻不再被需要，也就是說這個套件成了孤兒，耗在你的系統中佔空間。</p>
+
+<p>好險 Pacman 同時也提供了一個好用的功能，可以讓你查詢哪些套件是 Orphan：
+<code>$ pacman -Qdt</code></p>
+
+<p>更棒的是，你可以遞迴的刪掉這些套件：
+<code>$ pacman -Rns $(pacman -Qdtq)</code></p>
+
+<p>定期清理這些孤兒套件是個好習慣！</p>
+</div>
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-01T23:20:00+08:00" pubdate data-updated="true">Jun 1<span>st</span>, 2012</time></div>
+        <div class="tags">
 
 <div class="cat">
   
@@ -72,86 +86,25 @@
   
 </div>
 
-</span>
-    
-    <span class="comments"><a href="/blog/2012/06/01/archlinux-clean-orphan-package/#disqus_thread">Comments</a></span>
-    
 </div>
-	</article>
+        
+    </div>
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
 </section>
-
-<section class="archive">
-	
-	
-	<article class="archive">
-		
-<h1 class="title"><a href="/blog/2012/05/02/archlinux-locate/">archlinux 的 locate</a></h1>
-<div class="meta">
-	<span class="date">May  2</span>
-	<span class="tags">
-
-<div class="cat">
-  
-    <a class='category' href='/blog/categories/archlinux/'>archlinux</a>
-  
-</div>
-
-</span>
-    
-    <span class="comments"><a href="/blog/2012/05/02/archlinux-locate/#disqus_thread">Comments</a></span>
-    
-</div>
-	</article>
-</section>
-
-<section class="archive">
-	
-	
-	<article class="archive">
-		
-<h1 class="title"><a href="/blog/2012/04/28/reinstall-grub2-on-archlinux/">在 archlinux 上安裝 grub2</a></h1>
-<div class="meta">
-	<span class="date">Apr 28</span>
-	<span class="tags">
-
-<div class="cat">
-  
-    <a class='category' href='/blog/categories/archlinux/'>archlinux</a>
-  
-</div>
-
-</span>
-    
-    <span class="comments"><a href="/blog/2012/04/28/reinstall-grub2-on-archlinux/#disqus_thread">Comments</a></span>
-    
-</div>
-	</article>
-</section>
-
-<section class="archive">
-	
-	
-	<article class="archive">
-		
-<h1 class="title"><a href="/blog/2012/04/15/fix-that-gem-not-in-the-path/">解決 archlinux 下 gem 不在系統路徑(PATH)的問題</a></h1>
-<div class="meta">
-	<span class="date">Apr 15</span>
-	<span class="tags">
-
-<div class="cat">
-  
-    <a class='category' href='/blog/categories/archlinux/'>archlinux</a>, <a class='category' href='/blog/categories/gem/'>gem</a>
-  
-</div>
-
-</span>
-    
-    <span class="comments"><a href="/blog/2012/04/15/fix-that-gem-not-in-the-path/#disqus_thread">Comments</a></span>
-    
-</div>
-	</article>
-</section>
-
 </div>
 	<footer class="inner">Copyright &copy; 2012 Lazy is good</footer>
 	<script src="/javascripts/jquery.fancybox.pack.js"></script>
@@ -162,7 +115,10 @@
       var disqus_shortname = 'kusoayan';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://kusoayan.github.com/blog/2012/06/01/archlinux-clean-orphan-package/';
+        var disqus_url = 'http://kusoayan.github.com/blog/2012/06/01/archlinux-clean-orphan-package/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
